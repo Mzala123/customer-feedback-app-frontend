@@ -26,20 +26,21 @@
         </a>
       </div>
       <div class="hidden md:flex space-x-1">
-        <a
+        <router-link
           v-for="link in home_Links"
-          :key="link.name"
+          :key="link.title"
+          v-bind:to="{name: link.name}"
           class="text-sm px-5 bg-transparent text-white rounded-lg hover:text-white_slate focus:outline-none focus:shadow-outline"
-          href="#"
+          
         >
           {{ link.title }}
-        </a>
+        </router-link>
       </div>
       <div class="hidden md:flex items-center space-x-2">
         <!--sign up button-->
         <a
           class="px-6 py-2 text-sm text-center bg-white rounded-full"
-          href="#"
+          href="/about"
         >
           Login
         </a>
@@ -77,8 +78,8 @@
     <a
           v-for="link in home_Links"
           :key="link.name"
+          
           class="block py-3 px-5 text-sm hover:text-white_slate text-white"
-          href="#"
         >
           {{ link.title }}
     </a>
@@ -99,6 +100,11 @@
    </div>
   </div>
   </nav>
+   
+    <router-view></router-view>
+ 
+  
+
 </template>
 
 <script>
@@ -109,10 +115,10 @@ export default {
     const showMobileMenu = ref(false);
 
     const home_Links = ref([
-      { title: "Home", name: "our_stuff" },
-      { title: "Our Staff", name: "our_stuff" },
-      { title: "About Us", name: "about_us" },
-      { title: "Contact us", name: "contact_us" },
+      { title: "Home", name: "home" },
+      { title: "Our Staff", name: "our-stuff" },
+      { title: "About Us", name: "about-us" },
+      { title: "Contact us", name: "contact-us" },
     ]);
 
     const openHamburger = () => {};
@@ -120,8 +126,10 @@ export default {
     return {
       home_Links,
       openHamburger,
-      showMobileMenu
+      showMobileMenu,
     };
-  },
+  }
+
+
 };
 </script>
