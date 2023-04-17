@@ -3,14 +3,21 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import OurStaff  from '../views/OurStaff.vue'
 import ContactUs from '../views/ContactUs.vue'
+import Login from '../views/auth/login.vue'
+import Register from '../views/auth/register.vue'
+import NavHome from '../views/NavHome.vue'
 
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView,
+    component: NavHome,
     children: [
+      {
+        path: '/',
+        name: 'home',
+        component: HomeView
+       },
      {
       path: '/about',
       name: 'about-us',
@@ -24,6 +31,16 @@ const routes = [
       path: '/contact_us',
       name: 'contact-us',
       component: ContactUs
+     },
+     {
+      path: '/login',
+      name: 'login',
+      component: Login
+     },
+     {
+      path: '/register-account',
+      name: 'register',
+      component: Register
      }
     ]
   },

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container mx-auto">
         Hello there
     </div>
 </template>

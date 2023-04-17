@@ -1,11 +1,11 @@
 <template>
   <nav>
-  <div class="h-16 bg-navy_blue">
+  <div class="h-16 bg-medium_light_blue">
     <div
       class="container mx-auto flex flex-row items-center justify-between py-5 px-5"
     >
       <div class="flex space-x-4">
-        <a href="" class="flex items-center space-x-1">
+        <router-link :to="'/'" class="flex items-center space-x-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -23,7 +23,7 @@
             />
           </svg>
           <span class="font-semibold text-white text-lg">CLient</span>
-        </a>
+        </router-link>
       </div>
       <div class="hidden md:flex space-x-1">
         <router-link
@@ -38,17 +38,16 @@
       </div>
       <div class="hidden md:flex items-center space-x-2">
         <!--sign up button-->
-        <a
-          class="px-6 py-2 text-sm text-center bg-white rounded-full"
-          href="/about"
+        <router-link
+          class="px-6 py-2 text-sm text-center bg-white rounded-full hover:px-7 font-semibold"
+          :to="'/login'"
         >
           Login
-        </a>
-        <a
-          class="px-6 py-2 text-sm text-center bg-amber text-white rounded-full"
-          href="#"
-          >Register</a
-        >
+        </router-link>
+        <router-link
+          class="px-6 py-2 text-sm text-center bg-amber text-white rounded-full hover:px-7 font-semibold"
+          :to="'/register-account'"
+          >Register</router-link>
       </div>
       <!--show button hamburger on mobile menu -->
       <div class="md:hidden flex items-center">
@@ -73,29 +72,29 @@
     </div>
   </div>
   <!--mobile menu-->
-  <div class="bg-navy_blue">
+  <div class="bg-medium_light_blue">
    <div class="container mx-auto md:hidden items-center pb-4 duration-700 ease-in-out" v-show="showMobileMenu" :class="[showMobileMenu ? 'left-0' : 'left -[-100%]' ]">
-    <a
+    <router-link 
           v-for="link in home_Links"
           :key="link.name"
-          
+          v-bind:to="{name: link.name}"
           class="block py-3 px-5 text-sm hover:text-white_slate text-white"
         >
           {{ link.title }}
-    </a>
+    </router-link>
 
-    <a
-          class="block px-5 py-3 mx-3 my-4 text-sm text-center bg-white rounded-full"
-          href="#"
+    <router-link
+          class="block px-5 py-3 mx-3 my-4 text-sm text-center bg-white rounded-full font-semibold"
+          v-bind:to="'/login'"
         >
           Login
-    </a>
-    <a
-          class="block px-5 py-3 mx-3 mt-2 text-sm text-center bg-amber rounded-full"
-          href="#"
+    </router-link>
+    <router-link
+          class="block px-5 py-3 mx-3 mt-2 text-sm text-center bg-amber rounded-full font-semibold"
+          v-bind:to="'/register-account'"
         >
           Register
-    </a>
+    </router-link>
 
    </div>
   </div>

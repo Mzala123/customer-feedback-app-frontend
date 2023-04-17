@@ -1,20 +1,20 @@
 <template>
     <div class="container mx-auto">
-        Our Stuff
+      <h1>registration form</h1>
     </div>
 </template>
 
 <script>
- 
 
- export default{
+import {ref} from 'vue'
+
+export default{
     setup(){
 
         return{
-            
+
         }
     }
-
- }
+}
 
 </script>

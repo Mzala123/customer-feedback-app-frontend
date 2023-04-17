@@ -1,9 +1,8 @@
 <template>
-  <main>
-    <NavBar />
-  </main>
+  <div class="container mx-auto">
+    <h1>Welcome to home page</h1>
+  </div>
 </template>
 
 <script setup>
-import NavBar from '../components/NavBar.vue'
 </script>
