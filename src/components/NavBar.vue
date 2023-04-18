@@ -1,6 +1,6 @@
 <template>
   <nav>
-  <div class="h-16 bg-medium_light_blue">
+  <div class="h-16 bg-medium_light_blue fixed w-full left-0 top-0 z-50">
     <div
       class="container mx-auto flex flex-row items-center justify-between py-5 px-5"
     >
@@ -72,7 +72,7 @@
     </div>
   </div>
   <!--mobile menu-->
-  <div class="bg-medium_light_blue">
+  <div class="bg-medium_light_blue mt-16">
    <div class="container mx-auto md:hidden items-center pb-4 duration-700 ease-in-out" v-show="showMobileMenu" :class="[showMobileMenu ? 'left-0' : 'left -[-100%]' ]">
     <router-link 
           v-for="link in home_Links"
