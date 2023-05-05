@@ -6,6 +6,7 @@ import ContactUs from '../views/ContactUs.vue'
 import Login from '../views/auth/login.vue'
 import Register from '../views/auth/register.vue'
 import NavHome from '../views/NavHome.vue'
+import SideBar from '../components/SideBar.vue'
 
 
 const routes = [
@@ -42,8 +43,13 @@ const routes = [
       name: 'register',
       component: Register
      }
-    ]
+    ],
   },
+  {
+    path: '/sidebar',
+    name: 'side-bar',
+    component: SideBar
+  }
 
 
   // {

@@ -1,8 +1,20 @@
 <template>
-  <div class="container mx-auto">
-    <h1>Welcome to home page</h1>
-  </div>
+  <div class="container mx-auto px-4 sm:px-8">
+      
+     <h1>home</h1>   
+ </div>
 </template>
 
-<script setup>
+<script>
+
+export default{
+    setup(){
+ 
+    
+        return{
+
+        }
+
+    }
+}
 </script>

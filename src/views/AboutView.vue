@@ -1,9 +1,11 @@
 <template>
   <div class="container mx-auto">
-    <h1>This is an about us page</h1>
+   <h2>about us</h2>
   </div>
 </template>
 
-<style>
-
-</style>
+<script>
+export default {
+  setup() {},
+};
+</script>
