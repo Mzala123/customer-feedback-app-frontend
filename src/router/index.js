@@ -3,10 +3,16 @@ import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import OurStaff  from '../views/OurStaff.vue'
 import ContactUs from '../views/ContactUs.vue'
-import Login from '../views/auth/login.vue'
-import Register from '../views/auth/register.vue'
+import LoginView from '../views/auth/LoginView.vue'
+import RegisterView from '../views/auth/RegisterView.vue'
 import NavHome from '../views/NavHome.vue'
-import SideBar from '../components/SideBar.vue'
+import SideNav from '../components/SideNav.vue'
+
+import AdminDashboard from '../views/admin/AdminDashboard.vue'
+import CreateUser from '../views/admin/CreateUser.vue'
+import UserList from '../views/admin/UserList.vue'
+import AdminProfile from '../views/admin/AdminProfile.vue'
+
 
 
 const routes = [
@@ -36,21 +42,42 @@ const routes = [
      {
       path: '/login',
       name: 'login',
-      component: Login
+      component: LoginView
      },
      {
       path: '/register-account',
       name: 'register',
-      component: Register
+      component: RegisterView
      }
     ],
   },
   {
-    path: '/sidebar',
-    name: 'side-bar',
-    component: SideBar
+    path: '/sidenav',
+    component: SideNav,
+    children:[
+      {
+        path: '/admin_dashboard',
+        name: 'admin-dashboard',
+        component: AdminDashboard
+       },
+       {
+        path: '/admin_profile_settings',
+        name: 'admin-profile-settings',
+        component: AdminProfile
+       },
+       {
+        path: '/user_list',
+        name: 'user-list',
+        component: UserList
+       },
+       {
+        path: '/add_user',
+        name: 'add-user',
+        component: CreateUser
+       },
+    ]
   }
-
+  
 
   // {
   //   path: '/about',

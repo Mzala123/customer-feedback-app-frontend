@@ -46,7 +46,8 @@ export default {
     const alert_fill_fields = ref(false)
 
     const login = ()=>{
-         router.push({path:"/sidebar"})
+         router.push({path:"/sidenav"})
+         
           // if(!useremail || !password){
           //   alert_fill_fields = true
           // }
