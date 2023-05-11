@@ -92,7 +92,7 @@
                                     </div>
 
                                     <div class="relative w-full mb-3 mt-6">
-                                       <button class="flex justify-center items-center rounded-lg bg-medium_light_blue px-3 py-3 text-white w-full hover:bg-blue">
+                                       <button class="flex justify-center items-center rounded-lg bg-medium_light_blue px-3 py-3 text-white w-full hover:bg-dark_blue">
                                             <PlusCircleIcon class="h-6 w-6 mr-3"/>
                                             <p> Save </p>
                                        </button>
