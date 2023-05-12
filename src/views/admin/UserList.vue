@@ -40,6 +40,8 @@
 //import  from "vue3-easy-data-table"
 import {ref, onMounted, reactive} from 'vue'
 import axios from 'axios';
+import config  from '../../../config'
+
 import { DocumentArrowDownIcon } from '@heroicons/vue/24/outline';
 
 export default{
@@ -72,13 +74,13 @@ export default{
 
 
    onMounted(()=>{
-        create_bambo()
+       list_of_employees()
     })
 
-     const create_bambo = ()=>{
+     const list_of_employees = ()=>{
         is_loading.value = true
         axios
-         .get('http://localhost:3000/api/employee_list')
+         .get(`${config.API_URL}/employee_list`)
          .then((response)=>{
              users.value = response.data
              console.log(users.value)
@@ -94,7 +96,7 @@ export default{
          headers,
         // items,
          is_loading,
-         create_bambo,
+         list_of_employees,
          users,
          searchValue,
          searchField 

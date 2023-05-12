@@ -3,7 +3,7 @@
  
     <!--sidebar-->
     
-    <div class="w-80 h-screen flex flex-col fixed container shadow-sm mx-auto transition-all duration-500 top-0 bg-lighest z-50 pt-16"
+    <div class="w-80 h-screen flex flex-col fixed container shadow-sm mx-auto transition-all duration-300 top-0 bg-lighest z-50 pt-16"
      :class="[isOpen? 'left-0' : '-left-80']">
          <div class="flex flex-row mt-5 px-5">
             <router-link :to="'/add_user'" class="h-12 rounded-xl bg-light_sky_blue font-semibold hover:shadow-md px-3 py-3 flex items-center w-auto">
@@ -32,7 +32,7 @@
     <!--content--> 
     <div class="w-full transition-all duration-500" :class="[isOpen? 'md:pl-80' : 'pl-0']">
         <!--header-->
-        <div   class=" flex w-full justify-between h-16 fixed bg-lighest left-0 top-0 transition-all duration-500 z-[99]  items-center px-8 shadow-sm border-b border-lighter">
+        <div   class=" flex w-full justify-between h-16 fixed bg-lighest left-0 top-0 transition-all duration-300 z-[99]  items-center px-8 shadow-sm border-b border-lighter">
            <div class="flex item-center">
                <button @click="isOpen = !isOpen" class="">
                  <Bars3Icon class="h-7 w-7"/>
