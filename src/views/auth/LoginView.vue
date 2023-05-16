@@ -78,9 +78,9 @@ export default {
                      sessionStorage.setItem("userid", userid)
 
                      if(user_type === "Admin"){
-                      router.push({path:"/sidenav"})
+                      router.push({path:"/admin_dashboard"})
                      }else if(user_type === "Customer"){
-                      router.push({path:"/sidenav"})
+                      router.push({path:"/customer_dashboard"})
                      }else if(user_type === "Enquiry Personnel"){
                       //router.push({path:"/sidenav"})
                      }
