@@ -25,9 +25,11 @@
             :search-field="searchField"
             :search-value="searchValue"
         >
-        <template #item-action="{  _id }">
-           <button @click="handleDelete(_id)">delete</button>
-  </template>
+        <template #item-action="{_id}">
+           <button @click="deleteUser(_id)">
+              <TrashIcon class="stroke-red-700 ml-2 h-5 w-5"></TrashIcon>
+          </button>
+       </template>
     </EasyDataTable>
        </div>
        <div v-else class="animate-pulse text-center py-16 text-sm">
@@ -42,10 +44,10 @@ import {ref, onMounted, reactive} from 'vue'
 import axios from 'axios';
 import config  from '../../../config'
 
-import { DocumentArrowDownIcon } from '@heroicons/vue/24/outline';
+import { DocumentArrowDownIcon, TrashIcon } from '@heroicons/vue/24/outline';
 
 export default{
-    components:{DocumentArrowDownIcon
+    components:{DocumentArrowDownIcon, TrashIcon
     },
     setup(){
 
@@ -66,13 +68,6 @@ export default{
 
     ])
 
-    // const items = ref([
-    //   { "name": "Curry", "height": 178, "weight": 77, "age": 20 },
-    // //   { "name": "James", "height": 180, "weight": 75, "age": 21 },
-    // //   { "name": "Jordan", "height": 181, "weight": 73, "age": 22 }
-    // ]);
-
-
    onMounted(()=>{
        list_of_employees()
     })
@@ -89,14 +84,19 @@ export default{
          }).catch(()=>{
             is_loading.value = false
          })
-      
-     
      }
+
+     const deleteUser = (user_id)=>{
+        console.log(user_id)
+     }
+
         return{
          headers,
         // items,
          is_loading,
          list_of_employees,
+         deleteUser,
+         
          users,
          searchValue,
          searchField 

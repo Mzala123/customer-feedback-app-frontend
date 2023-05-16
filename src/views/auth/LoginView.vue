@@ -1,15 +1,15 @@
 <template>
   
     <div class="h-screen bg-gray_darkish  relative flex flex-col space-y-10 justify-center items-center">
-       <div class="bg-white md:shadow-sm sm:shadow-none rounded p-6 w-96">
+       <div class="bg-white md:shadow-md sm:shadow-none rounded p-6 w-96">
             <h1 class="text-2xl font-bold leading-normal ">Welcome to</h1>
             <div class="text-sm">NBM Customer feedback app</div> 
-            <form class="space-y-5 mt-5">
+            <form class="space-y-5 mt-5" @submit.prevent="login">
               <div class="relative w-full mb-3">
-              <label class="block text-blueGray-600  mb-1" htmlfor="grid-password">
+              <label class="block text-blueGray-600  mb-1">
                 Enter username
               </label>
-              <input type="text" v-model="useremail" class="w-full border border-gray-500 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none">
+              <input type="text" v-model="email" class="w-full border border-gray-500 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none">
             </div>
 
 
@@ -19,13 +19,14 @@
                </label>
                <input v-model="password" class="w-full border border-gray-500 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none" type="password"/>
                </div>
-                {{useremail }}
+                
 
                <div class="-m-2">
                 <a class="font-bold text-medium_light_blue hover:text-blue hover:underline p-2 rounded-full" href="#">Forgot password?</a>
                </div>
 
-              <button v-on:click="login" class="w-full text-center bg-medium_light_blue hover:bg-blue rounded-full text-white py-3 font-medium">Sign in
+              <button class="w-full text-center bg-medium_light_blue hover:bg-dark_blue 
+              rounded-full text-white py-3 font-medium">Sign in
                  
               </button>
             </form>
@@ -38,25 +39,60 @@
 <script>
 import { ref } from "vue";
 import router from "../../router";
+import Swal from 'sweetalert2'
+import axios from 'axios';
+import config  from '../../../config'
+
 
 export default {
   setup() {
-    const useremail = ref(null)
+    const email = ref(null)
     const password  = ref(null)
     const alert_fill_fields = ref(false)
 
     const login = ()=>{
-         router.push({path:"/sidenav"})
-         
-          // if(!useremail || !password){
-          //   alert_fill_fields = true
-          // }
-          // useremail = "mtende"
-          // console.log(`You clicked me! ${useremail}`);
+       
+          if(!email.value || !password.value){
+             Swal.fire({
+              text:"Please fill in all required fields!",
+              icon:"warning",
+              dangerMode: true
+             })
+          }else{
+            axios
+              .post(`${config.API_URL}/login`,
+              {
+                email: email.value,
+                password: password.value
+              }
+              ).then((response)=>{
+                  if(response.status === 200){
+                     sessionStorage.setItem("Authorization", response.data.token)
+                     sessionStorage.setItem("user", JSON.stringify(response.data.user))
+                     let user = JSON.parse(sessionStorage.getItem("user"))
+                     let user_type = user.user_type
+                     let userid = user._id
+
+                     sessionStorage.setItem("role", user_type)
+                     console.log("the userrole is "+sessionStorage.getItem("role"))
+                     sessionStorage.setItem("userid", userid)
+
+                     if(user_type === "Admin"){
+                      router.push({path:"/sidenav"})
+                     }else if(user_type === "Customer"){
+                      router.push({path:"/sidenav"})
+                     }else if(user_type === "Enquiry Personnel"){
+                      router.push({path:"/sidenav"})
+                     }
+                  }
+              })
+          }
+        
+          //router.push({path:"/sidenav"})
     };
 
     return {
-         useremail,
+         email,
          password,
          alert_fill_fields,
          login
@@ -66,7 +102,7 @@ export default {
 </script>
 
 <style>
-        *{
+        /* *{
             margin:0;
             padding:0;
         }
@@ -86,5 +122,5 @@ export default {
             transition: all 0.2s ease-out;
             top: 0.4rem;
             left: 0;
-        }
+        } */
 </style>

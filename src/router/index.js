@@ -13,6 +13,8 @@ import CreateUser from '../views/admin/CreateUser.vue'
 import UserList from '../views/admin/UserList.vue'
 import AdminProfile from '../views/admin/AdminProfile.vue'
 
+import CustomerDashboard from '../views/customer/CustomerDashboard.vue'
+
 
 
 const routes = [
@@ -75,6 +77,11 @@ const routes = [
         name: 'add-user',
         component: CreateUser
        },
+       {
+        path:'/customer_dashboard',
+        name:'customer-dashboard',
+        component:CustomerDashboard
+       }
     ]
   }
   

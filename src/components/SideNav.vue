@@ -5,6 +5,7 @@
     
     <div class="w-80 h-screen flex flex-col fixed container shadow-sm mx-auto transition-all duration-300 top-0 bg-lighest z-50 pt-16"
      :class="[isOpen? 'left-0' : '-left-80']">
+
          <div class="flex flex-row mt-5 px-5">
             <router-link :to="'/add_user'" class="h-12 rounded-xl bg-light_sky_blue font-semibold hover:shadow-md px-3 py-3 flex items-center w-auto">
                  <PlusCircleIcon class="h-6 w-6 mr-2"/>
@@ -23,8 +24,22 @@
             </router-link> 
 
             <div class="border border-lighter mt-8 mb-12 mx-2"></div>
-           
         </div>
+
+
+        <!-- <div  v-show="user_type === 'Customer'" class="mt-4">
+             <router-link @click="name = item.name" :class="`flex items-center focus:outline-none hover:text-blue hover:border-l-2 border-blue px-8 py-2 w-full 
+             hover:bg-lighter mr-auto mb-3 ${name === item.name ? 'text-blue  bg-lighter border-l-2 border-blue' : '' }`"
+             v-for="item of customerMenu" 
+             :key="item.name" 
+             v-bind:to="{name: item.name}">
+                <component :is="item.icon" class="h-6 w-6 mr-4 text-left"></component>
+                <p class="text-sm font-normal text-left">{{ item.title }}</p>
+            </router-link> 
+
+            <div class="border border-lighter mt-8 mb-12 mx-2"></div>
+        </div> -->
+
          
    </div>
     <!--end of sidebar-->
@@ -55,7 +70,7 @@
         
         <!--middle content-->
         <div class="pt-16 bg-white rounded-lg">
-           <router-view></router-view>
+           <router-view> </router-view>
         </div>
         <!--end middle contend-->
 
@@ -65,7 +80,7 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, onMounted} from "vue";
 import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon,
      Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon} from '@heroicons/vue/24/outline'
 import router from '../router';
@@ -75,14 +90,28 @@ export default{
     },
     setup(){
 
-       
+    let user_type = ref("")
     const adminMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'admin-dashboard'},
-        //    {title:'Notification', icon: BellIcon, name:'user-list'},
+        // {title:'Notification', icon: BellIcon, name:'user-list'},
            {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
            {title:'Users list', icon: UserGroupIcon, name:'user-list'}
-           
     ]);
+
+    const customerMenu = ref([
+           {title:'Dashboard', icon: HomeIcon, name:'customer-dashboard'},
+         // {title:'Notification', icon: BellIcon, name:'user-list'},
+          //  {title:'Profile', icon: UserIcon, name:'customer-profile-settings'},
+          //  {title:'Users list', icon: UserGroupIcon, name:'user-list'}
+    ]);
+
+    //sessionStorage.setItem("role", user_type)
+
+    onMounted(()=>{
+       user_type = sessionStorage.getItem("role")
+       console.log(user_type)
+    })
+
 
     const name = ref('dashboard')
     const isOpen = ref(true)
@@ -93,9 +122,11 @@ export default{
 
     return {
     adminMenu,
+    customerMenu,
     name,
     login,
-    isOpen
+    isOpen,
+    user_type
     };
 
     }
