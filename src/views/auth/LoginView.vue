@@ -82,9 +82,25 @@ export default {
                      }else if(user_type === "Customer"){
                       router.push({path:"/sidenav"})
                      }else if(user_type === "Enquiry Personnel"){
-                      router.push({path:"/sidenav"})
+                      //router.push({path:"/sidenav"})
                      }
                   }
+              }).catch((error)=>{
+                const{status} = error.response
+                           if(status === 401){
+                             Swal.fire({
+                                text: "Incorrect credentials!",
+                                icon: "warning",
+                                dangerMode: true,
+                             })
+                           }else{
+          
+                            Swal.fire({
+                                text: "Check your network connection!",
+                                icon: "warning",
+                                dangerMode: true,
+                             })
+                           }
               })
           }
         

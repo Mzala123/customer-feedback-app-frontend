@@ -6,14 +6,15 @@
     <div class="w-80 h-screen flex flex-col fixed container shadow-sm mx-auto transition-all duration-300 top-0 bg-lighest z-50 pt-16"
      :class="[isOpen? 'left-0' : '-left-80']">
 
-         <div class="flex flex-row mt-5 px-5">
+         <div v-if="user_type === 'Admin'" class="flex flex-row mt-5 px-5">
             <router-link :to="'/add_user'" class="h-12 rounded-xl bg-light_sky_blue font-semibold hover:shadow-md px-3 py-3 flex items-center w-auto">
                  <PlusCircleIcon class="h-6 w-6 mr-2"/>
                  <p class="block text-sm ml-1">Employee</p>
             </router-link>
-            
+           
         </div> 
-        <div class="mt-4">
+        <div v-if="user_type === 'Admin'" class="mt-4">
+             
              <router-link @click="name = item.name" :class="`flex items-center focus:outline-none hover:text-blue hover:border-l-2 border-blue px-8 py-2 w-full 
              hover:bg-lighter mr-auto mb-3 ${name === item.name ? 'text-blue  bg-lighter border-l-2 border-blue' : '' }`"
              v-for="item of adminMenu" 
@@ -27,7 +28,7 @@
         </div>
 
 
-        <!-- <div  v-show="user_type === 'Customer'" class="mt-4">
+        <div  v-show="user_type === 'Customer'" class="mt-4">
              <router-link @click="name = item.name" :class="`flex items-center focus:outline-none hover:text-blue hover:border-l-2 border-blue px-8 py-2 w-full 
              hover:bg-lighter mr-auto mb-3 ${name === item.name ? 'text-blue  bg-lighter border-l-2 border-blue' : '' }`"
              v-for="item of customerMenu" 
@@ -38,7 +39,7 @@
             </router-link> 
 
             <div class="border border-lighter mt-8 mb-12 mx-2"></div>
-        </div> -->
+        </div> 
 
          
    </div>
@@ -90,7 +91,8 @@ export default{
     },
     setup(){
 
-    let user_type = ref("")
+    const user_type = ref("")
+
     const adminMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'admin-dashboard'},
         // {title:'Notification', icon: BellIcon, name:'user-list'},
@@ -108,7 +110,7 @@ export default{
     //sessionStorage.setItem("role", user_type)
 
     onMounted(()=>{
-       user_type = sessionStorage.getItem("role")
+       user_type.value = sessionStorage.getItem("role")
        console.log(user_type)
     })
 

@@ -193,12 +193,12 @@ export default{
                 }else if(response.status === 201){
                   Swal.fire({
                               title:"Information",
-                              text: "Employee Created Successfully!",
+                              text: "Customer record created Successfully!",
                               icon: "success",
                            })
                            .then((ok=>{
                             if(ok){
-                               router.push({path:"/user_list"})
+                               router.push({path:"/login"})
                             }      
                            }))
                 }
@@ -207,7 +207,7 @@ export default{
                   if(status === 404){
                       Swal.fire({
                               title:"Information",
-                              text: "Failed to create an Employee record!",
+                              text: "Failed to create an customer record!",
                               icon: "error",
                            })
                   }else{
