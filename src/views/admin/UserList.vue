@@ -60,6 +60,7 @@ export default{
 
         const headers = ([
       { text: "Email", value: "email", sortable: true },
+      { text: "User role", value: "user_type"},
       { text: "First name", value: "first_name"},
       { text: "Last name", value: "last_name", sortable: true },
       { text: "Gender", value: "gender", sortable: true },

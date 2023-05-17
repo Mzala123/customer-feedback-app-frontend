@@ -7,7 +7,7 @@
                          <div class="flex-auto p-4">
                             <div class="flex flex-wrap">
                                <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                  <h5 class="text-blueGray-400 uppercase font-bold text-sm">System Users</h5>
+                                  <h5 class="text-gray-600 uppercase font-bold text-sm">System Users</h5>
                                   <span class="font-bold text-2xl">{{ all_users_count }}</span>
                                </div>
                                <div class="relative w-auto pl-4 flex-initial">
@@ -26,7 +26,7 @@
                          <div class="flex-auto p-4">
                             <div class="flex flex-wrap">
                                <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
-                                  <h5 class="text-blueGray-400 uppercase font-bold text-sm">{{ user._id }}</h5>
+                                  <h5 class="text-gray-600 uppercase font-bold text-sm">{{ user._id }}</h5>
                                   <span class="font-bold text-2xl">{{ user.user_type_count }}</span>
                                </div>
                                <div class="relative w-auto pl-4 flex-initial">
@@ -43,10 +43,23 @@
                          </div>
                       </div>
             </div>
-
-
-
         </div>
+
+        <div class="flex flex-wrap mt-16 mx-4">
+            
+            <div class="w-full lg:w-6/12 xl:w-6/12 px-4 bg-lighest rounded-lg mb-6 xl:mb-0 shadow-md">
+                <p class="items-center uppercase my-4 text-gray-600">Systems users based on gender</p>
+                <div id="chart">
+                    <apexchart
+                    type="donut"
+                    width="400"
+                    :options="chartOptions"
+                    :series="series"
+                    ></apexchart>
+                </div>
+             </div>
+        </div>
+
     </div>
 </template>
 
@@ -55,8 +68,9 @@ import {HomeIcon, UserGroupIcon, UserIcon, UserCircleIcon, UsersIcon} from '@her
 import {onMounted, ref} from 'vue'
 import config  from '../../../config'
 import axios from 'axios';
-import Swal from 'sweetalert2';
-import router from "../../router";
+import VueApexCharts from 'vue3-apexcharts'
+// import Swal from 'sweetalert2';
+// import router from "../../router";
 export default{
 
     components:{
@@ -64,20 +78,44 @@ export default{
        UserGroupIcon,
        UserIcon,
        UserCircleIcon,
-       UsersIcon
+       UsersIcon,
+       apexchart : VueApexCharts
     },
 
     setup(){
 
         const all_users_count = ref(0) 
         const user_count_role = ref(0)
+        const count = ref(0)
+        const users = ref([])
         const icons = [
            {titles:"one", icon:UserIcon},
            {titles:"two", icon:UserCircleIcon},
            {titles:"three", icon:UsersIcon},
         ]
         
-
+       const series = ref([])
+       const chartOptions = {
+        chart: {
+          width: 380,
+          height: 400,
+          id:"chart"
+        },
+        labels: [],
+        responsive: [
+          {
+                breakpoint: 480,
+                options: {
+                chart: {
+                    width: 200,
+                },
+                legend: {
+                    position: "bottom",
+                },
+                },
+            },
+            ],
+        }
         //read_count_all_users_in_system
 
         const count_all_users = ()=>{
@@ -102,9 +140,25 @@ export default{
                })
         }
 
+        const get_count_by_gender = ()=>{
+             axios
+              .get(`${config.API_URL}/read_users_by_gender`)
+              .then((response)=>{
+                if(response.status === 200){
+                      users.value = response.data
+                      console.log(users)
+                      for(count.value=0; count.value< users.value.length; count.value++){
+                        chartOptions.labels.push(users.value[count.value]._id)
+                        series.value.push(users.value[count.value].countByGender)
+                      }
+                 }
+              })
+        }
+
         onMounted(()=>{
             count_all_users(),
-            users_count_based_on_role()
+            users_count_based_on_role(),
+            get_count_by_gender()
        })
 
         return{
@@ -112,7 +166,12 @@ export default{
             all_users_count,
             user_count_role,
             icons,
-            users_count_based_on_role
+            chartOptions,
+            series,
+            count,
+            users,
+            users_count_based_on_role,
+            get_count_by_gender
 
         }
     }
