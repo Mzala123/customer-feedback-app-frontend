@@ -3,7 +3,7 @@
         <div class="flex flex-wrap">
            
             <div class="w-full lg:w-4/12 xl:w-3/12 px-4">
-                      <div class="relative flex flex-col min-w-0 break-words border-t-4 border-blue bg-white rounded-lg mb-6 xl:mb-0 shadow-md">
+                      <div class="relative flex flex-col min-w-0 break-words border-t-4 border-blue bg-lighest rounded-lg mb-6 xl:mb-0 shadow-md">
                          <div class="flex-auto p-4">
                             <div class="flex flex-wrap">
                                <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
@@ -22,7 +22,7 @@
             </div>
 
             <div v-for="user in user_count_role" :key="user._id" class="w-full lg:w-4/12 xl:w-3/12 px-4">
-                      <div class="relative flex flex-col min-w-0 break-words border-t-4 border-medium_light_blue bg-white rounded-lg mb-6 xl:mb-0 shadow-md">
+                      <div class="relative flex flex-col min-w-0 break-words border-t-4 border-medium_light_blue bg-lighest rounded-lg mb-6 xl:mb-0 shadow-md">
                          <div class="flex-auto p-4">
                             <div class="flex flex-wrap">
                                <div class="relative w-full pr-4 max-w-full flex-grow flex-1">
