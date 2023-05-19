@@ -25,10 +25,21 @@
                 <a class="font-bold text-medium_light_blue hover:text-blue hover:underline p-2 rounded-full" href="#">Forgot password?</a>
                </div>
 
-              <button class="w-full text-center bg-medium_light_blue hover:bg-dark_blue 
-              rounded-full text-white py-3 font-medium">Sign in
-                 
+              <button :disabled="loading" class="w-full flex justify-center text-center bg-medium_light_blue hover:bg-dark_blue 
+                rounded-full text-white py-3 font-medium"> 
+                
+                <span v-if="loading" class="flex justify-items-center">
+                  <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
+                    <circle class="opacity-25 bg-white" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75 bg-white" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.314-2.686 6-6 6-3.314 0-6-2.686-6-6H6c0 4.411 3.589 8 8 8z"></path>
+                  </svg>
+                  Loading...
+                </span>
+                <span v-else>
+                  Sign in
+                </span>
               </button>
+
             </form>
        </div>
        <p>Not a Customer?<a class="text-medium_light_blue font-semibold hover:text-blue hover:underline p-2 rounded-full" href="#">Register now</a></p>
@@ -51,15 +62,17 @@ export default {
     const password  = ref(null)
     const alert_fill_fields = ref(false)
     const userStore = useUserStore()
+    const loading = ref(false)
 
     const login = ()=>{
-       
+          loading.value = true
           if(!email.value || !password.value){
              Swal.fire({
               text:"Please fill in all required fields!",
               icon:"warning",
               dangerMode: true
              })
+             loading.value = false
           }else{
             axios
               .post(`${config.API_URL}/login`,
@@ -77,8 +90,7 @@ export default {
 
                      userStore.userId = user._id
                      userStore.persistUserId();
-                     //userStore.persistUserId();
-                     
+                   
                      sessionStorage.setItem("role", user_type)
                      console.log("the userrole is "+sessionStorage.getItem("role"))
                      sessionStorage.setItem("userid", userid)
@@ -91,7 +103,11 @@ export default {
                      }else if(user_type === "Enquiry Personnel"){
                       //router.push({path:"/sidenav"})
                      }
+                   
+                     loading.value = false
+
                   }
+
               }).catch((error)=>{
                 const{status} = error.response
                            if(status === 401){
@@ -100,6 +116,7 @@ export default {
                                 icon: "warning",
                                 dangerMode: true,
                              })
+                        loading.value = false
                            }else{
           
                             Swal.fire({
@@ -107,7 +124,9 @@ export default {
                                 icon: "warning",
                                 dangerMode: true,
                              })
-                           }
+
+                             loading.value = false
+                         }
               })
           }
         
@@ -118,7 +137,8 @@ export default {
          email,
          password,
          alert_fill_fields,
-         login
+         login,
+         loading
     };
   },
 };
