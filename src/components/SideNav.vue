@@ -85,6 +85,8 @@ import { ref, onMounted} from "vue";
 import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon,
      Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon} from '@heroicons/vue/24/outline'
 import router from '../router';
+import { useUserStore } from '../stores/store';
+
 export default{
     components:{
       Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon
@@ -92,6 +94,8 @@ export default{
     setup(){
 
     const user_type = ref("")
+    const userStore = useUserStore();
+    const userId = userStore.getUserId;
 
     const adminMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'admin-dashboard'},
@@ -112,6 +116,7 @@ export default{
     onMounted(()=>{
        user_type.value = sessionStorage.getItem("role")
        console.log(user_type)
+       console.log("the user id is "+userId)
     })
 
 
@@ -128,7 +133,8 @@ export default{
     name,
     login,
     isOpen,
-    user_type
+    user_type,
+    userId
     };
 
     }

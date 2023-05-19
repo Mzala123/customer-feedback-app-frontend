@@ -14,12 +14,11 @@ import VueApexCharts from "vue3-apexcharts";
 
 const app = createApp(App)
 
-
-app.use(createPinia())
 app.use(VueSweetalert2)
 app.use(VueApexCharts)
 window.Swal =  app.config.globalProperties.$swal;
 app.use(router)
 app.component('EasyDataTable', Vue3EasyDataTable)
-
+app.use(createPinia())
+//app.use(pinia)
 app.mount('#app')

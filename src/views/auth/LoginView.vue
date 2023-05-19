@@ -42,6 +42,7 @@ import router from "../../router";
 import Swal from 'sweetalert2'
 import axios from 'axios';
 import config  from '../../../config'
+import {useUserStore} from '../../stores/store'
 
 
 export default {
@@ -49,6 +50,7 @@ export default {
     const email = ref(null)
     const password  = ref(null)
     const alert_fill_fields = ref(false)
+    const userStore = useUserStore()
 
     const login = ()=>{
        
@@ -73,9 +75,14 @@ export default {
                      let user_type = user.user_type
                      let userid = user._id
 
+                     userStore.userId = user._id
+                     userStore.persistUserId();
+                     //userStore.persistUserId();
+                     
                      sessionStorage.setItem("role", user_type)
                      console.log("the userrole is "+sessionStorage.getItem("role"))
                      sessionStorage.setItem("userid", userid)
+                     console.log("the userid is "+sessionStorage.getItem("userid"))
 
                      if(user_type === "Admin"){
                       router.push({path:"/admin_dashboard"})
