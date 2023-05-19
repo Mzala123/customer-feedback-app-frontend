@@ -42,7 +42,8 @@
 //import  from "vue3-easy-data-table"
 import {ref, onMounted, reactive} from 'vue'
 import axios from 'axios';
-import config  from '../../../config'
+import config  from './../../../config'
+import Swal from 'sweetalert2';
 
 import { DocumentArrowDownIcon, TrashIcon } from '@heroicons/vue/24/outline';
 
@@ -88,7 +89,46 @@ export default{
      }
 
      const deleteUser = (user_id)=>{
-        console.log(user_id)
+           //console.log(user_id)
+          Swal.fire({
+                title: 'Are you sure?',
+                text: `You are about to delete this record. This action cannot be undone.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete!'
+            }).then((ok)=>{
+                if(ok){
+                         axios
+                 .delete(`${config.API_URL}/remove_user/${user_id}`)
+                 .then((response)=>{
+                    if(response.status === 204){
+                        list_of_employees()
+                    }
+                 }).catch((error)=>{
+                    const{status} = error.response
+                           if(status === 404){
+                             Swal.fire({
+                                text: "An error occured while deleting this record!",
+                                icon: "warning",
+                                dangerMode: true,
+                             })
+                        
+                           }else{
+          
+                            Swal.fire({
+                                text: "Check your network connection!",
+                                icon: "warning",
+                                dangerMode: true,
+                             })
+
+                           
+                         }
+                 })
+                }
+            })
+    
+           
      }
 
         return{

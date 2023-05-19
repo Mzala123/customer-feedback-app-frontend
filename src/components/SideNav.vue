@@ -41,7 +41,14 @@
             <div class="border border-lighter mt-8 mb-12 mx-2"></div>
         </div> 
 
-         
+
+       <!-- dropdown menu-->
+       
+
+
+       <!--end of dropdown menu-->
+
+
    </div>
     <!--end of sidebar-->
 
@@ -60,11 +67,36 @@
                 <h1 class="block text-xl font-semibold text-gray-500 flex items-center">Feedback</h1>
               
            </div>
-           <div>
-            <button class="flex rounded-full bg-lighter hover:bg-lightblue px-1 py-1 items-center">
+           <div class="relative">
+            <button @click="isDropdownOpen = !isDropdownOpen" class="flex rounded-full bg-lighter hover:bg-lightblue px-1 py-1 items-center">
                 <img src=".././assets/img/kendal.jpg" class="h-8 w-8 rounded-full" alt="">
                 <!-- <p class="pl-2"> Mtende Mwanza </p> -->
             </button>
+
+
+            <div v-if="isDropdownOpen" class="origin-top-right absolute right-0 mt-2 w-80 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                     
+                     <div class="flex flex-col items-left p-4 ">
+                        <div class="flex items-center">
+                         <img class="w-8 h-8 mb-3 rounded-full shadow-lg" src=".././assets/img/profile.png" alt="Bonnie image"/>
+                         <h5 class="mb-1 ml-4 text-sm font-medium text-gray-900 dark:text-gray-800"> {{ users?.first_name }} {{ users?.last_name }}</h5>
+                        </div>
+                         <span class="font-semibold text-sm text-gray-500 dark:text-gray-600"></span>
+                         <span class="text-xs text-gray-500 dark:text-gray-600">Employee no: {{ users?.person_no }}</span>
+                        <div class="my-5 border-b border-lighter"></div>
+                        <router-link v-bind:to="'/'" class="flex items-center text-sm w-full bg-lighest py-2 px-2 hover:shadow-md rounded-lg">
+                            <!-- <ArrowLeftIcon class="h-8 w-8"></ArrowLeftIcon> -->
+                            <component :is="icons.signout" class="h-6 w-6 mr-4 text-left"></component>
+                             Sign Out
+                        </router-link>
+
+                         
+                     </div>
+             
+              <!-- Dropdown menu content -->
+            </div>
+                    
+
            </div>
         </div>
         <!--end of header-->
@@ -83,20 +115,28 @@
 <script>
 import { ref, onMounted} from "vue";
 import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon,
-     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon} from '@heroicons/vue/24/outline'
+     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon} from '@heroicons/vue/24/outline'
 import router from '../router';
 import { useUserStore } from '../stores/store';
+import axios from 'axios';
+import config from '../../config'
 
 export default{
     components:{
-      Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon
+      Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon, ArrowLongLeftIcon, ArrowLeftIcon
     },
     setup(){
 
     const user_type = ref("")
+     const users = ref(null)
+
     const userStore = useUserStore();
     const userId = userStore.getUserId;
 
+    const isDropdownOpen = ref(false);
+    const icons = [
+      {name:'icon', signout:ArrowLeftIcon}
+    ]
     const adminMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'admin-dashboard'},
         // {title:'Notification', icon: BellIcon, name:'user-list'},
@@ -111,13 +151,26 @@ export default{
           //  {title:'Users list', icon: UserGroupIcon, name:'user-list'}
     ]);
 
-    //sessionStorage.setItem("role", user_type)
+        function read_user_information(){
+               axios
+                 .get(`${config.API_URL}/read_one_user/${userId}`)
+                 .then((response)=>{
+                    if(response.status === 200){
+                        users.value = response.data
+                        console.log(users)
+                       // is_loading.value = false
+                    }
+                 })
+        }
+  
 
     onMounted(()=>{
        user_type.value = sessionStorage.getItem("role")
+       read_user_information()
        console.log(user_type)
        console.log("the user id is "+userId)
     })
+
 
 
     const name = ref('dashboard')
@@ -134,7 +187,12 @@ export default{
     login,
     isOpen,
     user_type,
-    userId
+    userId,
+    isDropdownOpen,
+    icons,
+    read_user_information,
+    users
+    
     };
 
     }
