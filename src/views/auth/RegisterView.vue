@@ -207,7 +207,7 @@ export default{
                   if(status === 404){
                       Swal.fire({
                               title:"Information",
-                              text: "Failed to create an customer record!",
+                              text: "Failed to create a customer record!",
                               icon: "error",
                            })
                   }else{

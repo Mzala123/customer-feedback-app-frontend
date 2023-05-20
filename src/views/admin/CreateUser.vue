@@ -122,9 +122,21 @@
                                     </div>
 
                                     <div class="relative w-full mb-3 mt-6">
-                                       <button class="flex justify-center items-center rounded-lg bg-medium_light_blue px-3 py-3 text-white w-full hover:bg-dark_blue">
+                                       <button :disabled="loading" class="flex justify-center items-center rounded-lg 
+                                        bg-medium_light_blue px-3 py-3 text-white w-full hover:bg-dark_blue">
+                                            
+                                          <span v-if="loading" class="flex justify-items-center">
+                                                <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25 bg-white" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75 bg-white" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.314-2.686 6-6 6-3.314 0-6-2.686-6-6H6c0 4.411 3.589 8 8 8z"></path>
+                                                </svg>
+                                                Loading...
+                                            </span>
+                                          <span v-else class="flex justify-items-center">
                                             <PlusCircleIcon class="h-6 w-6 mr-3"/>
                                             <p> Save </p>
+                                          </span>
+
                                        </button>
                                     </div>
                                
@@ -141,8 +153,7 @@
 
 <script>
 import {ref} from 'vue'
-import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon,
-     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon} from '@heroicons/vue/24/outline'
+import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
 import config  from '../../../config'
 import axios from 'axios';
 import Swal from 'sweetalert2';
@@ -166,16 +177,21 @@ export default{
         const place_residence = ref(null)
         const current_city = ref(null)
         const user_type = ref(null)
+        const loading = ref(false)
 
 
          function create_employee_record(){
+           
             if(!national_id.value || !first_name.value|| !last_name.value || !email.value || !gender.value){
+             loading.value = true
              Swal.fire({
               text:"Please fill in all required fields!",
               icon:"warning",
               dangerMode: true
              })
+             loading.value = false
           }else{
+             loading.value = true
              axios
                .post(`${config.API_URL}/register`,
                {
@@ -199,6 +215,7 @@ export default{
                                 text: response.data.message,
                                 icon: "warning",
                              })
+                    loading.value = false
 
                   }else if(response.status === 201){
                     Swal.fire({
@@ -207,9 +224,11 @@ export default{
                                 icon: "success",
                              })
                              .then((ok=>{
+                              loading.value = false
                               if(ok){
                                  router.push({path:"/user_list"})
-                              }      
+                              }  
+
                              }))
                   }
                }).catch((error)=>{
@@ -244,7 +263,8 @@ export default{
             place_residence,
             current_city,
             user_type,
-            create_employee_record
+            create_employee_record,
+            loading
         }
     }
 }

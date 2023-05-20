@@ -89,7 +89,6 @@ export default{
      }
 
      const deleteUser = (user_id)=>{
-           //console.log(user_id)
           Swal.fire({
                 title: 'Are you sure?',
                 text: `You are about to delete this record. This action cannot be undone.`,
@@ -127,7 +126,6 @@ export default{
                  })
                 }
             })
-    
            
      }
 
