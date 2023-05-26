@@ -9,7 +9,7 @@
               <label class="block text-blueGray-600  mb-1">
                 Enter username
               </label>
-              <input type="text" v-model="email" class="w-full border border-gray-500 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none">
+              <input type="email" v-model="email" class="w-full border border-gray-500 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none">
             </div>
 
 

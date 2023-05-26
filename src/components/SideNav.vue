@@ -28,6 +28,13 @@
         </div>
 
 
+
+        <div v-show="user_type === 'Customer'"  class="flex flex-row mt-5 px-5">
+          <router-link :to="'/chat_bot'" class="h-12 rounded-full bg-light_sky_blue font-semibold hover:shadow-md px-3 py-3 flex items-center w-auto">
+                 <ChatBubbleOvalLeftEllipsisIcon class="h-7 w-7 mr-2"/>
+                 <p class="block text-sm ml-1">Chat</p>
+            </router-link>
+        </div>
         <div  v-show="user_type === 'Customer'" class="mt-4">
              <router-link @click="name = item.name" :class="`flex items-center focus:outline-none hover:text-blue hover:border-l-2 border-blue px-8 py-2 w-full 
              hover:bg-lighter mr-auto mb-3 ${name === item.name ? 'text-blue  bg-lighter border-l-2 border-blue' : '' }`"
@@ -84,7 +91,7 @@
                          <span class="font-semibold text-sm text-gray-500 dark:text-gray-600"></span>
                          <span class="text-xs text-gray-500 dark:text-gray-600">Employee no: {{ users?.person_no }}</span>
                         <div class="my-5 border-b border-lighter"></div>
-                        <router-link v-bind:to="'/'" class="flex items-center text-sm w-full bg-lighest py-2 px-2 hover:shadow-md rounded-lg">
+                        <router-link v-bind:to="'/login'" class="flex items-center text-sm w-full bg-lighest py-2 px-2 hover:shadow-md rounded-lg">
                             <!-- <ArrowLeftIcon class="h-8 w-8"></ArrowLeftIcon> -->
                             <component :is="icons.signout" class="h-6 w-6 mr-4 text-left"></component>
                              Sign Out
@@ -114,7 +121,7 @@
 
 <script>
 import { ref, onMounted} from "vue";
-import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon,
+import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon, ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon,
      Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon} from '@heroicons/vue/24/outline'
 import router from '../router';
 import { useUserStore } from '../stores/store';
@@ -123,7 +130,8 @@ import config from '../../config'
 
 export default{
     components:{
-      Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon, ArrowLongLeftIcon, ArrowLeftIcon
+      Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon, ArrowLongLeftIcon, ArrowLeftIcon,
+      ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon
     },
     setup(){
 
@@ -147,7 +155,7 @@ export default{
     const customerMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'customer-dashboard'},
          // {title:'Notification', icon: BellIcon, name:'user-list'},
-          //  {title:'Profile', icon: UserIcon, name:'customer-profile-settings'},
+           {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
           //  {title:'Users list', icon: UserGroupIcon, name:'user-list'}
     ]);
 

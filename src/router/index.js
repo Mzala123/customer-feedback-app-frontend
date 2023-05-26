@@ -10,10 +10,13 @@ import SideNav from '../components/SideNav.vue'
 
 import AdminDashboard from '../views/admin/AdminDashboard.vue'
 import CreateUser from '../views/admin/CreateUser.vue'
+import UpdateUser from '../views/admin/UpdateUser.vue'
 import UserList from '../views/admin/UserList.vue'
 import AdminProfile from '../views/admin/AdminProfile.vue'
+import UserDetails from '../views/admin/UserDetails.vue'
 
 import CustomerDashboard from '../views/customer/CustomerDashboard.vue'
+import ChatBot from '../views/customer/ChatBot.vue'
 
 
 
@@ -78,9 +81,24 @@ const routes = [
         component: CreateUser
        },
        {
+        path: '/update_user',
+        name: 'update-user',
+        component: UpdateUser
+       },
+       {
+        path: '/view_user_details/:id',
+        name: 'view-user-details',
+        component: UserDetails
+       },
+       {
         path:'/customer_dashboard',
         name:'customer-dashboard',
         component:CustomerDashboard
+       },
+       {
+        path:'/chat_bot',
+        name:'chat-bot',
+        component:ChatBot
        }
     ]
   }

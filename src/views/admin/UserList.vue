@@ -26,9 +26,21 @@
             :search-value="searchValue"
         >
         <template #item-action="{_id}">
+
+          <div class="flex">
+            <router-link :to="'/view_user_details/'+_id">
+              <EyeIcon @click="viewUser(_id)" class="stroke-gray-700 mr-2 h-5 w-5"></EyeIcon>
+            </router-link>
+
+            <router-link :to="''" @click="updateUser(_id)">
+              <PencilIcon class="stroke-blue mr-2 h-5 w-5"></PencilIcon>
+            </router-link>
+
            <button @click="deleteUser(_id)">
-              <TrashIcon class="stroke-red-700 ml-2 h-5 w-5"></TrashIcon>
+              <TrashIcon class="stroke-red-700 mr-2 h-5 w-5"></TrashIcon>
           </button>
+        </div>
+
        </template>
     </EasyDataTable>
        </div>
@@ -45,10 +57,10 @@ import axios from 'axios';
 import config  from './../../../config'
 import Swal from 'sweetalert2';
 
-import { DocumentArrowDownIcon, TrashIcon } from '@heroicons/vue/24/outline';
+import { DocumentArrowDownIcon, TrashIcon, EyeSlashIcon, EyeIcon,PencilIcon } from '@heroicons/vue/24/outline';
 
 export default{
-    components:{DocumentArrowDownIcon, TrashIcon
+    components:{DocumentArrowDownIcon, TrashIcon, EyeSlashIcon, PencilIcon, EyeIcon
     },
     setup(){
 
@@ -86,6 +98,14 @@ export default{
          }).catch(()=>{
             is_loading.value = false
          })
+     }
+
+     const updateUser = (user_id)=>{
+
+     }
+
+     const viewUser = (user_id)=>{
+
      }
 
      const deleteUser = (user_id)=>{
