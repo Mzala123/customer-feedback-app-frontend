@@ -6,7 +6,7 @@
                         <button class="rounded-lg bg-medium_light_blue hover:bg-dark_blue hover:shadow-md w-48 
                         flex items-center text-white py-3 px-2">
                            <DocumentArrowDownIcon class="h-6 w-6 mr-3"></DocumentArrowDownIcon>
-                            <p>Export</p> 
+                            <p>Export Archived</p> 
                         </button>
                     </div>
                     <div class="relative w-96 mb-6">
@@ -31,14 +31,6 @@
             <router-link :to="'/view_user_details/'+_id">
               <EyeIcon @click="viewUser(_id)" class="stroke-gray-700 mr-2 h-5 w-5"></EyeIcon>
             </router-link>
-
-            <router-link :to="''" @click="updateUser(_id)">
-              <PencilIcon class="stroke-blue mr-2 h-5 w-5"></PencilIcon>
-            </router-link>
-
-           <button @click="deleteUser(_id)">
-              <ArchiveBoxArrowDownIcon class="stroke-red-700 mr-2 h-5 w-5"></ArchiveBoxArrowDownIcon>
-          </button>
         </div>
 
        </template>
@@ -89,7 +81,7 @@ export default{
      const list_of_employees = ()=>{
         is_loading.value = true
         axios
-         .get(`${config.API_URL}/employee_list`)
+         .get(`${config.API_URL}/list_archived_accounts`)
          .then((response)=>{
              users.value = response.data
              console.log(users.value)

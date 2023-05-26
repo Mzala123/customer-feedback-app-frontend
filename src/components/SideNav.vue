@@ -122,7 +122,7 @@
 <script>
 import { ref, onMounted} from "vue";
 import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon, ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon,
-     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon} from '@heroicons/vue/24/outline'
+     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon, ArchiveBoxIcon} from '@heroicons/vue/24/outline'
 import router from '../router';
 import { useUserStore } from '../stores/store';
 import axios from 'axios';
@@ -131,7 +131,7 @@ import config from '../../config'
 export default{
     components:{
       Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon, ArrowLongLeftIcon, ArrowLeftIcon,
-      ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon
+      ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon, ArchiveBoxIcon
     },
     setup(){
 
@@ -149,7 +149,9 @@ export default{
            {title:'Dashboard', icon: HomeIcon, name:'admin-dashboard'},
         // {title:'Notification', icon: BellIcon, name:'user-list'},
            {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
-           {title:'Users list', icon: UserGroupIcon, name:'user-list'}
+           {title:'Users list', icon: UserGroupIcon, name:'user-list'},
+           {title:'Archived Accounts', icon: ArchiveBoxIcon, name:'archived-accounts'},
+
     ]);
 
     const customerMenu = ref([

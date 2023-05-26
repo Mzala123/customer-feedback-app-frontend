@@ -14,6 +14,7 @@ import UpdateUser from '../views/admin/UpdateUser.vue'
 import UserList from '../views/admin/UserList.vue'
 import AdminProfile from '../views/admin/AdminProfile.vue'
 import UserDetails from '../views/admin/UserDetails.vue'
+import ArchivedAccounts from '../views/admin/ArchivedAccounts.vue'
 
 import CustomerDashboard from '../views/customer/CustomerDashboard.vue'
 import ChatBot from '../views/customer/ChatBot.vue'
@@ -75,6 +76,7 @@ const routes = [
         name: 'user-list',
         component: UserList
        },
+
        {
         path: '/add_user',
         name: 'add-user',
@@ -84,6 +86,11 @@ const routes = [
         path: '/update_user',
         name: 'update-user',
         component: UpdateUser
+       },
+       {
+        path: '/archived_accounts',
+        name: 'archived-accounts',
+        component: ArchivedAccounts
        },
        {
         path: '/view_user_details/:id',

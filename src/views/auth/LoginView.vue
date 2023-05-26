@@ -42,7 +42,7 @@
 
             </form>
        </div>
-       <p>Not a Customer?<a class="text-medium_light_blue font-semibold hover:text-blue hover:underline p-2 rounded-full" href="#">Register now</a></p>
+       <p>Not a Customer?<router-link :to="'/register-account'" class="text-medium_light_blue font-semibold hover:text-blue hover:underline p-2 rounded-full" href="#">Register now</router-link></p>
     </div>
  
 </template>

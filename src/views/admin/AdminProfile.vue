@@ -93,14 +93,6 @@
         </div> 
        </div>
 
-         <!-- <div v-else class="flex justify-center items-center text-black">
-            
-                <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
-                    <circle class="opacity-25 bg-white" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75 bg-white" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.314-2.686 6-6 6-3.314 0-6-2.686-6-6H6c0 4.411 3.589 8 8 8z"></path>
-                  </svg>
-                  Fetching data...
-         </div> -->
       </div>
     </div>
 
