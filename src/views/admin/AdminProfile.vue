@@ -212,13 +212,20 @@ export default{
                 icon:"warning",
                 dangerMode: true
                 })
-            }else if(password.value !== passcode.value){
+            }else if(password.value !== passcode.value ){
                   Swal.fire({
                     text:"Make sure that the passwords are similar!",
                     icon:"warning",
                     dangerMode: true
                     })
-            }else{
+            }else if(password.value.length <8 || passcode.value.length <8){
+                Swal.fire({
+                    text:"Password should have 8 characters and above!",
+                    icon:"warning",
+                    dangerMode: true
+                    })
+            }
+            else{
                    loading.value = true
                     axios
                         .put(`${config.API_URL}/update_user_password/${userId}`,
