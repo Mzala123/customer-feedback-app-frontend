@@ -1,18 +1,324 @@
 <template>
-    <div>
+    <div class="container mx-auto">
+        <div class="relative flex flex-col gap-4">
 
+        <div v-if="is_loading"
+            class="absolute z-10 mt-10 bg-white/50 flex justify-center items-center w-full h-full"
+            >
+            <div class="h-10 w-10 border-2 animate-spin bg-blue"></div>
+        </div>
+
+
+          <div class="w-full lg:w-8/12 px-4 mx-auto mt-6">
+                <div class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-sm rounded-xl bg-lighest">
+                   <div class="rounded-t bg-lighter mb-0 px-6 py-6">
+                        <div class="flex justify-center text-center">
+                            <h4 class="text-gray-700 text-xl font-semibold items-center">
+                              EDIT EMPLOYEE RECORD
+                            </h4>
+                        </div>
+                  </div>
+                
+                    <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                        <!-- <form action="" @submit.prevent="create_employee_record"> -->
+                            <h5 class="text-gray-600 text-sm mt-3 mb-6 font-semibold uppercase">
+                                User Information
+                            </h5>
+                            <div class="flex flex-wrap">
+
+                                <div class="w-full lg:w-6/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        National Id</label>
+                                        <input v-model="users.national_id" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-6/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Firstname</label>
+                                        <input v-model="users.first_name" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-6/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Lastname</label>
+                                        <input v-model="users.last_name" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+                                </div>
+
+                                
+                                <div class="w-full lg:w-6/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Gender</label>
+                                        <select v-model="users.gender" class="px-2.5 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                            <option value="Male">Male</option>
+                                            <option value="Female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                 <!-- <div class="w-full lg:w-6/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        User role</label>
+                                        <select v-model="users.user_type" class="px-2.5 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                            <option value="Admin">Admin</option>
+                                            <option value="Enquiry Personnel">Enquiry Personnel</option>
+                                        </select>
+                                    </div> 
+                                </div> -->
+
+                                <div class="w-full lg:w-12/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Date of birth</label>
+                                        <input v-model="users.dob" type="date" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="mt-6 border-b-1 border-gray-600">
+
+                            <h5 class="text-gray-600 text-sm mt-3 mb-6 font-semibold uppercase">
+                                Contact Information
+                            </h5>
+                            <div class="flex flex-wrap">
+
+                                <div class="w-full lg:w-12/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Email</label>
+                                        <input v-model="users.email" type="email" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Phonenumber</label>
+                                        <input v-model="users.phone_number" type="number" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Current City</label>
+                                        <input v-model="users.current_city" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Place of residence </label>
+                                        <input v-model="users.place_residence" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        Address</label>
+                                        <textarea v-model="users.address" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150"> </textarea>
+                                    </div>
+
+                                    <div class="relative w-full mb-3 mt-6 flex justify-end">
+                                        
+                                        <!-- <button @click="reset_form" class="rounded-lg bg-red-600 mr-5 px-3 py-3 text-white w-52 hover:bg-red-700">
+                                           Cancel
+                                        </button> -->
+
+                                       <button @click="create_employee_record" :disabled="loading" class="flex justify-center items-center rounded-lg 
+                                        bg-medium_light_blue px-3 py-3 text-white w-52 hover:bg-dark_blue">
+                                            
+                                          <span v-if="loading" class="flex justify-items-center">
+                                                <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25 bg-white" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75 bg-white" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.314-2.686 6-6 6-3.314 0-6-2.686-6-6H6c0 4.411 3.589 8 8 8z"></path>
+                                                </svg>
+                                                Loading...
+                                            </span>
+                                          <span v-else class="flex justify-items-center">
+                                            <PencilIcon class="h-6 w-6 mr-3"/>
+                                            <p> Save </p>
+                                          </span>
+
+                                       </button>
+
+
+                                    </div>
+                               
+                                </div>
+
+                            </div>
+
+                        <!-- </form> -->
+                    </div>
+              </div>
+          </div>
+        </div>
     </div>
 </template>
 
 <script>
+import {onMounted, ref} from 'vue'
+import {PlusCircleIcon, UserPlusIcon, PencilIcon} from '@heroicons/vue/24/outline'
+import config  from '../../../config'
+import axios from 'axios';
+import Swal from 'sweetalert2';
+import router from "../../router";
+import { useRoute } from 'vue-router';
+
 export default{
-    
+    components:{
+        UserPlusIcon, PlusCircleIcon, PencilIcon
+    },
     setup(){
 
-        return{
+       const users = ref({
+        national_id : ref(null),
+        first_name : ref(null),
+        last_name : ref(null),
+        email : ref(null),
+        gender : ref(null),
+        dob : ref(null),
+        phone_number : ref(null),
+        profile_photo : ref(null),
+        address : ref(null),
+        place_residence : ref(null),
+        current_city : ref(null),
+        user_type : ref(null)
+    }
+        )
+        const loading = ref(false)
+        const is_loading = ref(false)
+        
+        const route = useRoute()
 
+        const get_list_user_by_id = (id)=>{
+           is_loading.value = true
+            axios
+             .get(`${config.API_URL}/read_one_user/`+id)
+             .then((response)=>{
+                users.value = response.data
+                console(users.value)
+             is_loading.value = false
+             }).catch((error)=>{
+                is_loading.value = false
+             })
+        }
+
+         function create_employee_record(){
+           
+            if(!users.value.national_id || !users.value.first_name|| !users.value.last_name || !users.value.email || !users.value.gender){
+             loading.value = true
+             Swal.fire({
+              text:"Please fill in all required fields!",
+              icon:"warning",
+              dangerMode: true
+             })
+             loading.value = false
+          }else{
+             loading.value = true
+             axios
+               .put(`${config.API_URL}/update_user/${route.params.id}`,
+               {
+                national_id: users.value.national_id,
+                first_name: users.value.first_name,
+                last_name: users.value.last_name,
+                email: users.value.email,
+                gender: users.value.gender,
+                dob: users.value.dob,
+                phone_number: users.value.phone_number,
+                profile_photo: users.value.profile_photo,
+                address: users.value.address,
+                place_residence: users.value.place_residence,
+                current_city: users.value.current_city
+               }
+               ).then((response)=>{
+                   if(response.status === 200){
+                    Swal.fire({
+                                title:"Information",
+                                text: "User information updated Successfully!",
+                                icon: "success",
+                             })
+                             .then((ok=>{
+                              loading.value = false
+                              if(ok){
+                                 router.push({path:"/user_list"})
+                              }  
+
+                             }))
+                  }
+               }).catch((error)=>{
+                 const{status} = error.response
+                    if(status === 404){
+                        Swal.fire({
+                                title:"Information",
+                                text: "Failed to update user record!",
+                                icon: "error",
+                             })
+                        loading.value = false
+                    }else{
+                        Swal.fire({
+                                title:"Information",
+                                text: "Check your network connection!",
+                                icon: "warning",
+                             })
+                    }
+               })
+          }
+         }
+
+         const reset_form = ()=>{
+            users.value.national_id = ""
+            users.value.first_name = ""
+            users.value.last_name =""
+            users.value.email =""
+            users.value.gender =""
+            users.value.dob =""
+            users.value.phone_number =""
+            users.value.profile_photo =""
+            users.value.address.value =""
+            users.value.place_residence =""
+            users.value.current_city =""
+            get_list_user_by_id(route.params.id)
+         }
+
+         onMounted(()=>{
+              get_list_user_by_id(route.params.id)
+         })
+
+        return{
+            // national_id,
+            // first_name,
+            // last_name,
+            // email,
+            // gender,
+            // dob,
+            // phone_number,
+            // profile_photo,
+            // address,
+            // place_residence,
+            // current_city,
+            // user_type,
+            users,
+
+            create_employee_record,
+
+            loading,
+            reset_form,
+            is_loading,
+            get_list_user_by_id
         }
     }
 }
-
 </script>

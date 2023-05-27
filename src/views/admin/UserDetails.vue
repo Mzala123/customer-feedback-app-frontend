@@ -4,7 +4,7 @@
         <div v-if="is_loading"
             class="absolute z-10 mt-10 bg-white/50 flex justify-center items-center w-full h-full"
             >
-            <div class="h-10 w-10 border-2 animate-spin bg-light_sky_blue"></div>
+            <div class="h-10 w-10 border-2 animate-spin bg-blue"></div>
         </div>
 
         <div class="mt-3 mb-6 ml-8">

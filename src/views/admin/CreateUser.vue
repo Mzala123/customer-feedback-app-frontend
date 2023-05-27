@@ -11,7 +11,7 @@
                   </div>
                 
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
-                        <form action="" @submit.prevent="create_employee_record">
+                        <!-- <form action="" @submit.prevent="create_employee_record"> -->
                             <h5 class="text-gray-600 text-sm mt-3 mb-6 font-semibold uppercase">
                                 User Information
                             </h5>
@@ -121,9 +121,14 @@
                                         bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150"> </textarea>
                                     </div>
 
-                                    <div class="relative w-full mb-3 mt-6">
-                                       <button :disabled="loading" class="flex justify-center items-center rounded-lg 
-                                        bg-medium_light_blue px-3 py-3 text-white w-full hover:bg-dark_blue">
+                                    <div class="relative w-full mb-3 mt-6 flex justify-end">
+                                        
+                                        <button @click="reset_form" class="rounded-lg bg-red-600 mr-5 px-3 py-3 text-white w-52 hover:bg-red-700">
+                                           Cancel
+                                        </button>
+
+                                       <button @click="create_employee_record" :disabled="loading" class="flex justify-center items-center rounded-lg 
+                                        bg-medium_light_blue px-3 py-3 text-white w-52 hover:bg-dark_blue">
                                             
                                           <span v-if="loading" class="flex justify-items-center">
                                                 <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
@@ -138,13 +143,15 @@
                                           </span>
 
                                        </button>
+
+
                                     </div>
                                
                                 </div>
 
                             </div>
 
-                        </form>
+                        <!-- </form> -->
                     </div>
               </div>
           </div>
@@ -250,6 +257,21 @@ export default{
           }
          }
 
+         const reset_form = ()=>{
+            national_id.value = ""
+            first_name.value = ""
+            last_name.value =""
+            email.value =""
+            gender.value =""
+            dob.value =""
+            phone_number.value =""
+            profile_photo.value =""
+            address.value =""
+            place_residence.value =""
+            current_city.value =""
+            user_type.value = ""
+         }
+
         return{
             national_id,
             first_name,
@@ -264,7 +286,8 @@ export default{
             current_city,
             user_type,
             create_employee_record,
-            loading
+            loading,
+            reset_form
         }
     }
 }

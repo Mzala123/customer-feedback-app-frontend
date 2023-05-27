@@ -29,10 +29,10 @@
 
           <div class="flex">
             <router-link :to="'/view_user_details/'+_id">
-              <EyeIcon @click="viewUser(_id)" class="stroke-gray-700 mr-2 h-5 w-5"></EyeIcon>
+              <EyeIcon class="stroke-gray-700 mr-2 h-5 w-5"></EyeIcon>
             </router-link>
 
-            <router-link :to="''" @click="updateUser(_id)">
+            <router-link :to="'/update_user/'+_id">
               <PencilIcon class="stroke-blue mr-2 h-5 w-5"></PencilIcon>
             </router-link>
 
@@ -100,13 +100,6 @@ export default{
          })
      }
 
-     const updateUser = (user_id)=>{
-
-     }
-
-     const viewUser = (user_id)=>{
-
-     }
 
      const deleteUser = (user_id)=>{
           Swal.fire({
