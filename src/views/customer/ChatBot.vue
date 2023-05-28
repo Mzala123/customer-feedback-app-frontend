@@ -63,14 +63,33 @@ export default {
     const decisionTree = {
       Greetings: {
         answer: "Hello! How can I assist you with Feedback App?",
-        nextQuestions: ["About the Author", "Favorite Book"],
+        nextQuestions: ["Creating an Account", "Check Account Balance", "Apply for Atm Card"],
       },
-      "About the Author": {
-        answer: "The author of the Harry Potter series is J.K. Rowling.",
-        nextQuestions: ["Favorite Book"],
+
+      "Creating an Account": {
+        answer: "You can create different types of accounts",
+        nextQuestions: ["Current Account", "Savings Account"],
       },
-      "Favorite Book": {
-        answer:'My favorite book in the series is "Harry Potter and the Prisoner of Azkaban".',
+      
+      "Current Account": {
+        answer:'Visit the bank branch.Provide required identification and address proof.Fill out the account opening form.Deposit initial funds if required.Review and sign necessary documents.Receive your account details.Start using your current account.".',
+        nextQuestions: [],
+      },
+        
+      "Savings Account": {
+        answer:'Visit the bank branch.Provide required identification and address proof.Fill out the account opening form.Deposit initial funds if required.Review and sign necessary documents.Receive your account details.Start using your savings account.',
+        nextQuestions: [],
+      },
+
+      
+
+      "Check Account Balance": {
+        answer:'To check your account balance, insert your ATM card on the Autoteller machine". Then input your corrent PIN, Choose the Check my balance option and yoou should be able to see your balance',
+        nextQuestions: [],
+      },
+
+      "Apply for Atm Card": {
+        answer:'Visit the bank branch.Request an ATM card application form.Fill out the form with your information.Provide necessary documents (ID, proof of address, etc.).Submit the application form and documents.Wait for processing.Once approved, collect your ATM card from the bank.".',
         nextQuestions: [],
       },
       // Add more questions and answers as needed

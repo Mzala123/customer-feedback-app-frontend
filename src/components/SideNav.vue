@@ -49,6 +49,20 @@
         </div> 
 
 
+        <div  v-show="user_type === 'Enquiry Personnel'" class="mt-4">
+             <router-link @click="name = item.name" :class="`flex items-center focus:outline-none hover:text-blue hover:border-l-2 border-blue px-8 py-2 w-full 
+             hover:bg-lighter mr-auto mb-3 ${name === item.name ? 'text-blue  bg-lighter border-l-2 border-blue' : '' }`"
+             v-for="item of enquiryMenu" 
+             :key="item.name" 
+             v-bind:to="{name: item.name}">
+                <component :is="item.icon" class="h-6 w-6 mr-4 text-left"></component>
+                <p class="text-sm font-normal text-left">{{ item.title }}</p>
+            </router-link> 
+
+            <div class="border border-lighter mt-8 mb-12 mx-2"></div>
+        </div> 
+
+
        <!-- dropdown menu-->
        
 
@@ -122,7 +136,9 @@
 <script>
 import { ref, onMounted} from "vue";
 import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon, ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon,
-     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon, ArchiveBoxIcon} from '@heroicons/vue/24/outline'
+     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon, ArchiveBoxIcon,InformationCircleIcon
+
+    } from '@heroicons/vue/24/outline'
 import router from '../router';
 import { useUserStore } from '../stores/store';
 import axios from 'axios';
@@ -131,7 +147,7 @@ import config from '../../config'
 export default{
     components:{
       Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon, ArrowLongLeftIcon, ArrowLeftIcon,
-      ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon, ArchiveBoxIcon
+      ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon, ArchiveBoxIcon, InformationCircleIcon
     },
     setup(){
 
@@ -156,7 +172,15 @@ export default{
 
     const customerMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'customer-dashboard'},
-         // {title:'Notification', icon: BellIcon, name:'user-list'},
+           {title:'Survey Tool', icon: PlusIcon, name:'survey-tool'},
+           {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
+          //  {title:'Users list', icon: UserGroupIcon, name:'user-list'}
+    ]);
+
+  
+    const enquiryMenu = ref([
+          //  {title:'Dashboard', icon: HomeIcon, name:'customer-dashboard'},
+           {title:'Survey Timeline', icon: InformationCircleIcon, name:'survey-issues'},
            {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
           //  {title:'Users list', icon: UserGroupIcon, name:'user-list'}
     ]);
@@ -193,6 +217,7 @@ export default{
     return {
     adminMenu,
     customerMenu,
+    enquiryMenu,
     name,
     login,
     isOpen,

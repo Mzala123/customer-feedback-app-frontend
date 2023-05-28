@@ -18,6 +18,10 @@ import ArchivedAccounts from '../views/admin/ArchivedAccounts.vue'
 
 import CustomerDashboard from '../views/customer/CustomerDashboard.vue'
 import ChatBot from '../views/customer/ChatBot.vue'
+import SurveyTool from '../views/customer/SurveyTool.vue'
+
+//Enquiry section
+import SurveyIssues from '../views/enquiry/SurveyIssues.vue'
 
 
 
@@ -106,6 +110,16 @@ const routes = [
         path:'/chat_bot',
         name:'chat-bot',
         component:ChatBot
+       },
+       {
+        path:'/survey_tool',
+        name:'survey-tool',
+        component:SurveyTool
+       },
+       {
+        path:'/survey_issues',
+        name:'survey-issues',
+        component:SurveyIssues
        }
     ]
   }

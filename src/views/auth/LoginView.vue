@@ -101,7 +101,7 @@ export default {
                      }else if(user_type === "Customer"){
                       router.push({path:"/customer_dashboard"})
                      }else if(user_type === "Enquiry Personnel"){
-                      //router.push({path:"/sidenav"})
+                      router.push({path:"/survey_issues"})
                      }
                    
                      loading.value = false
