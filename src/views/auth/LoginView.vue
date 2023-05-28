@@ -99,7 +99,7 @@ export default {
                      if(user_type === "Admin"){
                       router.push({path:"/admin_dashboard"})
                      }else if(user_type === "Customer"){
-                      router.push({path:"/customer_dashboard"})
+                      router.push({path:"/chat_bot"})
                      }else if(user_type === "Enquiry Personnel"){
                       router.push({path:"/survey_issues"})
                      }

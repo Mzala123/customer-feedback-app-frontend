@@ -84,9 +84,21 @@ export default {
       
 
       "Check Account Balance": {
-        answer:'To check your account balance, insert your ATM card on the Autoteller machine". Then input your corrent PIN, Choose the Check my balance option and yoou should be able to see your balance',
+        answer:'They are two options for checking the balance,',
+        nextQuestions: ["VIA Autoteller Machine","Using MO626"],
+      },
+
+      
+      "VIA Autoteller Machine": {
+        answer:'To check your account balance, insert your ATM card on the Autoteller machine". Then input your corrent PIN, Choose the Check my balance option and you should be able to see your balance',
         nextQuestions: [],
       },
+
+      "Using MO626": {
+        answer:'Type *626# on the phone application in your phone. Enter your PIN, Choose the Account transactions option(1). Lastly select Balance Enquiry to check your current balance.',
+        nextQuestions: [],
+      },
+
 
       "Apply for Atm Card": {
         answer:'Visit the bank branch.Request an ATM card application form.Fill out the form with your information.Provide necessary documents (ID, proof of address, etc.).Submit the application form and documents.Wait for processing.Once approved, collect your ATM card from the bank.".',
