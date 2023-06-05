@@ -104,42 +104,40 @@ export default{
      const deleteUser = (user_id)=>{
           Swal.fire({
                 title: 'Are you sure?',
-                text: `You are about to delete this record. This action cannot be undone.`,
+                text: `You are about to archive this record. This action cannot be undone.`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete!'
-            }).then((ok)=>{
-                if(ok){
-                         axios
-                 .delete(`${config.API_URL}/remove_user/${user_id}`)
-                 .then((response)=>{
-                    if(response.status === 204){
-                        list_of_employees()
-                    }
-                 }).catch((error)=>{
-                    const{status} = error.response
-                           if(status === 404){
-                             Swal.fire({
-                                text: "An error occured while deleting this record!",
-                                icon: "warning",
-                                dangerMode: true,
+                confirmButtonText: 'Yes, archive!'
+            }).then((result)=>{
+                if(result.isConfirmed){
+                       axios
+                        .put(`${config.API_URL}/remove_user_via_update/${user_id}`)
+                        .then((response)=>{
+                            if(response.status === 204){
+                                list_of_employees()
+                            }
+                        })
+                }else if(result.dismiss === Swal.DismissReason.cancel){
+                    console.log("Okay cancelled")
+                }
+            }).catch((error)=>{
+                const{status} = error.response
+                    if(status === 404){
+                        Swal.fire({
+                                title:"Information",
+                                text: "Failed to create an Employee record!",
+                                icon: "error",
                              })
-                        
-                           }else{
-          
-                            Swal.fire({
+                    }else{
+                        Swal.fire({
+                                title:"Information",
                                 text: "Check your network connection!",
                                 icon: "warning",
-                                dangerMode: true,
                              })
-
-                           
-                         }
-                 })
-                }
+                    }
             })
-           
+               
      }
 
         return{

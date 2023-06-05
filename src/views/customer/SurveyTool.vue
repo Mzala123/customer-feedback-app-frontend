@@ -4,6 +4,11 @@
         <div class="w-full lg:w-8/12 px-4 mx-6 mt-6">
             
             <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+
+                <!-- <button @click="toggleLanguage" class="ml-auto mb-4 px-3 py-2 bg-gray-500 text-white rounded">
+                    {{ language === 'English' ? 'Switch to Chichewa' : 'Switch to English' }}
+                </button> -->
+                
                  <h4 class="flex items-center font-semibold px-4 pt-6 pb-8">SURVEY TOOL</h4>
                  <!-- <hr class="mt-6 border-b-1 border-gray-600"> -->
                  <div class="w-full lg:w-12/12 px-4">
@@ -61,9 +66,9 @@
 
                                  </div>
                                 
-                            </div>
+            </div>
                             
-           </div>
+        </div>
     </div>
 </template>
 
@@ -82,6 +87,12 @@ export default{
         PlusCircleIcon, UserPlusIcon
     },
     setup(){
+
+        const language = ref('English');
+
+    const toggleLanguage = () => {
+      language.value = language.value === 'English' ? 'Chichewa' : 'English';
+    };
 
         const title = ref("")
         const description = ref("")
@@ -164,7 +175,9 @@ export default{
             title,
             description,
             type,
-            loading
+            loading,
+            language,
+            toggleLanguage
         }
     }
 }
