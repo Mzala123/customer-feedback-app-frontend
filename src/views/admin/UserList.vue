@@ -3,7 +3,7 @@
 
                 <div class="w-full  flex justify-between">
                     <div>
-                        <button class="rounded-lg bg-medium_light_blue hover:bg-dark_blue hover:shadow-md w-48 
+                        <button @click="exportUserList" class="rounded-lg bg-medium_light_blue hover:bg-dark_blue hover:shadow-md w-48 
                         flex items-center text-white py-3 px-2">
                            <DocumentArrowDownIcon class="h-6 w-6 mr-3"></DocumentArrowDownIcon>
                             <p>Export</p> 
@@ -56,8 +56,10 @@ import {ref, onMounted, reactive} from 'vue'
 import axios from 'axios';
 import config  from './../../../config'
 import Swal from 'sweetalert2';
-
 import { DocumentArrowDownIcon, TrashIcon, EyeSlashIcon, EyeIcon,PencilIcon, ArchiveBoxArrowDownIcon } from '@heroicons/vue/24/outline';
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+
 
 export default{
     components:{DocumentArrowDownIcon, TrashIcon, EyeSlashIcon, PencilIcon, EyeIcon, ArchiveBoxArrowDownIcon
@@ -100,6 +102,23 @@ export default{
          })
      }
 
+     const exportUserList = ()=>{
+          const doc = new jsPDF()
+          const rows = []
+          users.value.forEach(list =>{
+            const temp = [list.national_id, list.first_name+' '+list.last_name,list.email, list.gender, list.age, list.address]
+            rows.push(temp)
+          })
+          doc.text("Organisation | National Bank of Malawi",10, 10)
+          doc.text('Users report',10,20)
+          doc.line(0,35,400,35)
+          autoTable(doc,{
+            head: [['National Id', 'Name of client', 'Email', 'Gender','Age', 'Address']],
+                margin:{top:50},
+                body:[...rows]
+          })
+          doc.save('NB|Clients list.pdf')
+     }
 
      const deleteUser = (user_id)=>{
           Swal.fire({
@@ -138,7 +157,7 @@ export default{
                     }
             })
                
-     }
+       }
 
         return{
          headers,
@@ -149,7 +168,8 @@ export default{
          
          users,
          searchValue,
-         searchField 
+         searchField,
+         exportUserList
 
         }
     }
