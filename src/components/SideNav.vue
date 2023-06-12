@@ -136,7 +136,8 @@
 <script>
 import { ref, onMounted} from "vue";
 import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon, ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon,
-     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon, ArchiveBoxIcon,InformationCircleIcon
+     Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon, ArchiveBoxIcon,InformationCircleIcon,
+     QuestionMarkCircleIcon
 
     } from '@heroicons/vue/24/outline'
 import router from '../router';
@@ -179,10 +180,12 @@ export default{
 
   
     const enquiryMenu = ref([
-          //  {title:'Dashboard', icon: HomeIcon, name:'customer-dashboard'},
+           {title:'Dashboard', icon: HomeIcon, name:'enquiry-dashboard'},
            {title:'Survey Timeline', icon: InformationCircleIcon, name:'survey-issues'},
-           {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
-          //  {title:'Users list', icon: UserGroupIcon, name:'user-list'}
+           {title:'Responded Queries', icon: QuestionMarkCircleIcon, name:'responded-suverys'},
+           {title:'UnResponded Queries', icon: QuestionMarkCircleIcon, name:'unresponded-suverys'},
+           {title:'Profile', icon: UserIcon, name:'admin-profile-settings'}
+          
     ]);
 
         function read_user_information(){

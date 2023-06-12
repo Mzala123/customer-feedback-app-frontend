@@ -22,6 +22,9 @@ import SurveyTool from '../views/customer/SurveyTool.vue'
 
 //Enquiry section
 import SurveyIssues from '../views/enquiry/SurveyIssues.vue'
+import EnquiryDashboard from '../views/enquiry/EnquiryDashboard.vue'
+import RespondedSurveys from '../views/enquiry/RespondedSurveys.vue'
+import UnrespondedSurveys from '../views/enquiry/UnrespondedSurveys.vue'
 
 
 
@@ -120,6 +123,21 @@ const routes = [
         path:'/survey_issues',
         name:'survey-issues',
         component:SurveyIssues
+       },
+       {
+        path:'/responded_surveys',
+        name:'responded-suverys',
+        component:RespondedSurveys
+       },
+       {
+        path:'/unresponded_surveys',
+        name:'unresponded-suverys',
+        component:UnrespondedSurveys
+       },
+       {
+        path:'/enquiry_dashboard',
+        name:'enquiry-dashboard',
+        component:EnquiryDashboard
        }
     ]
   }
