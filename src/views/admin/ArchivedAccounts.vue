@@ -112,13 +112,6 @@ export default{
           doc.save('NB|Archived Clients Accounts.pdf')
      }
 
-     const updateUser = (user_id)=>{
-
-     }
-
-     const viewUser = (user_id)=>{
-
-     }
 
      const deleteUser = (user_id)=>{
           Swal.fire({

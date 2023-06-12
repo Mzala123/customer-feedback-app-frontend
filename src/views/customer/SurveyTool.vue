@@ -144,7 +144,7 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
           complaint: 'Dandaulo',
           suggestion: 'Lingaliro',
           feedbackDescription: 'Kafotokoza ka ndemanga',
-          submit: 'Chitumize',
+          submit: 'Tumiza',
           cancel:'Siya'
         },
       };
