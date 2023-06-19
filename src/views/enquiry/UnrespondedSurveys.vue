@@ -11,7 +11,7 @@
                     <div class="relative w-96 mb-6">
                         <!-- <label class="block text-gray-600 text-sm font-semibold mb-2">
                         Employee Id</label> -->
-                        <input type="text" v-model="searchValue" placeholder="search" class="px-3 py-3 ml-2 placeholder-black text-gray-700 border border-gray-700
+                        <input type="text" v-model="searchValue" placeholder="search" class="px-3 py-3 my-2 placeholder-black text-gray-700 border border-gray-700
                         bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
                     </div>
         </div>
@@ -106,7 +106,8 @@ import autoTable from 'jspdf-autotable'
                     autoTable(doc,{
                         head: [['Feedback type', 'Feedback title', 'Description', 'Date submitted','Submitted by']],
                             margin:{top:50},
-                            body:[...rows]
+                            body:[...rows],
+                            theme:'plain'
                     })
                     doc.save('NB|Unresponded queries list.pdf') 
            }
