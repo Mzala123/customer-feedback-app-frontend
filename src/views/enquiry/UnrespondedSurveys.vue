@@ -32,8 +32,6 @@
        <div v-else class="animate-pulse text-center py-16 text-sm">
             Fetching data...
        </div>
-
-
     </div>
 </template>
     

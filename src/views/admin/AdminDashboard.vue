@@ -52,12 +52,11 @@
                 <div id="chart">
                     <apexchart
                     type="donut"
-                    width="400"
                     :options="chartOptions"
                     :series="series"
                     ></apexchart>
                 </div>
-             </div>
+            </div>
         </div>
 
     </div>
