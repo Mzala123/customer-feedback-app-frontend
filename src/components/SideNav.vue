@@ -174,8 +174,10 @@ export default{
     const customerMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'customer-dashboard'},
            {title:'Survey Tool', icon: PlusIcon, name:'survey-tool'},
+           {title:'Responded Queries', icon: QuestionMarkCircleIcon, name:'my-responded-queries'},
+           {title:'Unresponded Queries', icon: QuestionMarkCircleIcon, name:'my-unresponded-queries'},
            {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
-          //  {title:'Users list', icon: UserGroupIcon, name:'user-list'}
+
     ]);
 
   

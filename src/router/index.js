@@ -19,6 +19,8 @@ import ArchivedAccounts from '../views/admin/ArchivedAccounts.vue'
 import CustomerDashboard from '../views/customer/CustomerDashboard.vue'
 import ChatBot from '../views/customer/ChatBot.vue'
 import SurveyTool from '../views/customer/SurveyTool.vue'
+import RespondedQueries  from '../views/customer/RespondedQueries.vue'
+import UnRespondedQueries from '../views/customer/UnRespondedQueries.vue'
 
 //Enquiry section
 import SurveyIssues from '../views/enquiry/SurveyIssues.vue'
@@ -138,6 +140,16 @@ const routes = [
         path:'/enquiry_dashboard',
         name:'enquiry-dashboard',
         component:EnquiryDashboard
+       },
+       {
+        path:'/my_responded_queries',
+        name:'my-responded-queries',
+        component:RespondedQueries
+       },
+       {
+        path:'/my_unresponded_queries',
+        name:'my-unresponded-queries',
+        component:UnRespondedQueries
        }
     ]
   }

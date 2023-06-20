@@ -1,10 +1,10 @@
 <template>
-    <div class="container mx-auto m-5 rounded-lg border-1 border-gray-600 px-3">
+   <div class="container mx-auto m-5 rounded-lg border-1 border-gray-600 px-3">
         <div class="w-full  flex justify-between">
                     <div>
-                        <button @click="export_responded_feedbacks" class="rounded-lg mr-2 bg-medium_light_blue hover:bg-dark_blue hover:shadow-md w-48 
+                        <button @click="export_my_unresponded_queries" class="rounded-lg mr-2 bg-medium_light_blue hover:bg-dark_blue hover:shadow-md w-48 
                         flex items-center text-white py-3 px-2">
-                           <DocumentArrowDownIcon class="h-6 w-6 mr-3"></DocumentArrowDownIcon>
+                           <DocumentArrowDownIcon class="h-6 w-6 mr-3 stroke-white"></DocumentArrowDownIcon>
                             <p>Export</p> 
                         </button>
                     </div>
@@ -32,43 +32,47 @@
        <div v-else class="animate-pulse text-center py-16 text-sm">
             Fetching data...
        </div>
-
-
     </div>
 </template>
-    
-    <script>
 
-import {ref, onMounted, reactive} from 'vue'
+<script>
+import { ref, onMounted} from 'vue'
 import axios from 'axios';
-import config  from './../../../config'
+import config  from '../../../config'
+import { useUserStore } from '../../stores/store';
 import Swal from 'sweetalert2';
 import { DocumentArrowDownIcon, TrashIcon, EyeSlashIcon, EyeIcon,PencilIcon, ArchiveBoxArrowDownIcon } from '@heroicons/vue/24/outline';
 import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
-    export default{
-        components:{DocumentArrowDownIcon},
-        setup(){
-
-            const feedbacks = ref([]);
-            const searchField = ref("");
-            const searchValue = ref("");
-            const is_loading = ref(false)
-
-            const headers = ([
+export default{
+   components:{
+    DocumentArrowDownIcon
+   },
+    setup(){
+        const userStore = useUserStore();
+        const userId = userStore.getUserId;
+        const feedbacks = ref([]);
+        const searchField = ref("");
+        const searchValue = ref("");
+        const is_loading = ref(false)
+        const headers = ([
                 { text: "Feedback Type", value: "type", sortable: true },
                 { text: "Feedback Title", value: "title"},
                 { text: "Description", value: "description"},
                 { text: "Date submitted", value: "date_submitted", sortable: true },
                 { text: "Submitted by", value: "feedBackDocs.email", sortable: true },
-           
             ])
 
-           const get_list_responded_queries = ()=>{
+        onMounted(()=>{
+           console.log("okay id "+userId)
+           get_list_my_unresponded_queries()
+        })
+
+        const get_list_my_unresponded_queries = ()=>{
                is_loading.value = true
                 axios
-                  .get(`${config.API_URL}/feedback_responded_list`)
+                  .get(`${config.API_URL}/my_unresponded_queries_list/${userId}`)
                   .then((response)=>{
                     if(response.status === 200){
                         feedbacks.value = response.data
@@ -93,42 +97,40 @@ import autoTable from 'jspdf-autotable'
                   })
            }
 
-           const export_responded_feedbacks = ()=>{
-                 const doc = new jsPDF({
-                    orientation: "landscape",
-                  })
-
+           const export_my_unresponded_queries = ()=>{
+                 const doc = new jsPDF()
                  const rows = []
                  feedbacks.value.forEach(list=>{
-                    const temp = [list.type, list.title, list.description, list.date_submitted, list.feedBackDocs.email+' '+list.feedBackDocs.first_name+' '+list.feedBackDocs.last_name,
-                             list.response[0].response_description, list.response[0].submission_date ]
+                    const temp = [list.type, list.title, list.description, list.date_submitted, list.feedBackDocs.email+' '+list.feedBackDocs.first_name+' '+list.feedBackDocs.last_name]
                     rows.push(temp)
                  })
                  doc.text("Organisation | National Bank of Malawi",10, 10)
-                 doc.text('Responded queries report',10,20)
+                 doc.text('My unresponded queries report',10,20)
                     doc.line(0,35,400,35)
                     autoTable(doc,{
-                        head: [['Feedback type', 'Feedback title', 'Description', 'Date submitted','Submitted by', 'Response Description', 'Response submission date']],
+                        head: [['Feedback type', 'Feedback title', 'Description', 'Date submitted','Submitted by']],
                             margin:{top:50},
                             body:[...rows],
-                             theme:'plain'
+                            theme:'plain'
                     })
-                    doc.save('NB|responded queries list.pdf') 
+                    doc.save('NB|Unresponded queries list.pdf') 
            }
 
-             onMounted(()=>{
-                get_list_responded_queries()
-             })
 
-             return{
-               feedbacks,
+        return{
+            feedbacks,
                searchField,
                searchValue,
                is_loading,
                headers,
-               get_list_responded_queries,
-               export_responded_feedbacks
-            }
+               get_list_my_unresponded_queries,
+               export_my_unresponded_queries
         }
     }
-    </script>
+}
+
+</script>
+
+<style>
+
+</style>

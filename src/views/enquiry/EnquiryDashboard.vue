@@ -22,7 +22,7 @@
                                     
                                     <!-- <UserIcon v-if="gender_count._id === 'Admin'" class="h-12 w-12"></UserIcon> 
                                     <UserCircleIcon v-if="gender_count._id === 'Enquiry Personnel'" class="h-12 w-12"></UserCircleIcon> 
-                                    <UsersIcon v-if="gender_count._id === 'Customer'" class="h-12 w-12"></UsersIcon>  -->
+                                    <UsersIcon v-if="gender_count._id === 'total'" class="h-12 w-12"></UsersIcon>  -->
 
                                   </div>
                                </div>
@@ -32,30 +32,31 @@
                       </div>
             </div>
       </div>
-      <div class="flex flex-wrap mt-8">
-        <div class="w-full lg:w-6/12 xl:w-5/12 bg-lighest rounded-lg mb-6 shadow-md mx-4">
+    
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-8 px-4">
+            <div class="bg-lighest rounded-lg mb-6 shadow-md">
                 <p class="items-center uppercase my-4 text-gray-600">Graphical analysis of feedbacks based on category</p>
-                <div id="chart2" class="chart-container">
-                    <apexchart
+                <div id="chart1" class="chart-container">
+                <apexchart
                     type="line"
                     :options="feedbackChartOptions"
                     :series="feedbackSeries"
-                    ></apexchart>
+                ></apexchart>
                 </div>
-        </div>
+            </div>
 
-        <div class="w-full lg:w-6/12 xl:w-5/12 bg-lighest mx-4 rounded-lg mb-6 shadow-md">
+            <div class="bg-lighest rounded-lg mb-6 shadow-md">
                 <p class="items-center uppercase my-4 text-gray-600">Graphical analysis of feedbacks based on customer gender</p>
                 <div id="chart2" class="chart-container">
-                    <apexchart
+                <apexchart
                     type="bar"
                     :options="genderFeedbackChartOptions"
                     :series="genderFeedbackSeries"
-                    ></apexchart>
+                ></apexchart>
                 </div>
+            </div>
         </div>
 
-      </div>
     </div>
     </template>
     
