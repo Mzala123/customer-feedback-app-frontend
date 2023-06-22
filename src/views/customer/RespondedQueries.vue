@@ -27,6 +27,7 @@
          <template #item-action="{_id}">
  
         </template>
+        
      </EasyDataTable>
         </div>
         <div v-else class="animate-pulse text-center py-16 text-sm">
@@ -62,6 +63,8 @@
                  { text: "Description", value: "description"},
                  { text: "Date submitted", value: "date_submitted", sortable: true },
                  { text: "Submitted by", value: "feedBackDocs.email", sortable: true },
+                 { text: "Response  Description", value: "response_description", sortable: true },
+                 { text: "Response Time", value: "response_submission_date", sortable: true },
              ])
  
          onMounted(()=>{
@@ -75,9 +78,16 @@
                    .get(`${config.API_URL}/my_responded_queries_list/${userId}`)
                    .then((response)=>{
                      if(response.status === 200){
-                         feedbacks.value = response.data
-                         console.log(feedbacks.value)
+                        //  feedbacks.value = response.data
+                        feedbacks.value = response.data.map((item) => ({
+                        ...item,
+                        response_description: item.response.length > 0 ? item.response[0].response_description : "",
+                        response_submission_date: item.response.length > 0 ? item.response[0].submission_date : "",
+
+                        }));
+
                          is_loading.value = false
+                          console.log(feedbacks.value)
                      }
                    }).catch((error)=>{
                      const{status} = error.response
