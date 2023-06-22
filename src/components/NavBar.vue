@@ -84,8 +84,10 @@
    </div>
   </div>
   </nav>
-   
-   <router-view></router-view>
+   <div class="mt-8">
+    <router-view></router-view>
+   </div>
+
  
   
 

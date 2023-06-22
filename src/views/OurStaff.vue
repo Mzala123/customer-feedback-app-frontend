@@ -1,39 +1,85 @@
 <template>
-    <div class="container mx-auto ">
-    <h2>our stuff</h2>
-    <div class="h-16 bg-white shadow-sm fixed w-full left-0 top-0 fixed  ">
-   <button class="bg-medium_light_blue py-2 px-4 text-white rounded-md m-4 w-64" @click="increment">
-    add
-    <div v-show="spinner"
-  class="inline-block h-4 w-4 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-  role="status">
-  <span
-    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-    >Loading...</span
-  >
-</div>
-</button>
+    <div class="container mx-auto">
+        <!--Testimonial-->
+        <section id="testimonials flex-grow">
+        <!--container to heading and testm blocks-->
+        <div class="max-w-6xl px-5 mx-auto mt-32 text-center">
+            <!--Heading-->
+            <h2 class="text-4xl font-bold text-center">
+                Our team | Profile
+            </h2>
+            <!--Testimonials container-->
+            <div class="flex flex-col mt-24 md:flex-row md:space-x-6">
+                <!--Testimonial 1-->
+                <div class="flex flex-col items-center p-6 space-y-6 rounded-lg
+             bg-lighest md:w-1/3">
+                    <img src="../assets/img/jcole.jpg" class="w-48 -mt-14 rounded-full h-48 object-cover" alt="">
+                    <h5 class="text-lg font-bold">Anisha Li</h5>
+                    <p class="text-sm text-darkGrayishBlue">
+                        "Manage has superchanged our team's workflow. The ability to
+                        maintain visibility on larger milestones at all times keeps
+                        everyone motivated".
+                    </p>
+                </div>
 
-  </div>
+                <!--Testimonial 2-->
+                <div class="hidden flex-col items-center p-6 space-y-6 rounded-lg
+              bg-lighest md:flex md:w-1/3">
+                    <img src="../assets/img/kendal.jpg" class="w-48 -mt-14 rounded-full h-48 object-cover" alt="">
+                    <h5 class="text-lg font-bold">Ali Bravo</h5>
+                    <p class="text-sm text-darkGrayishBlue">
+                        "Manage has superchanged our team's workflow. The ability to
+                        maintain visibility on larger milestones at all times keeps
+                        everyone motivated".
+                    </p>
+                </div>
+
+                <!--Testimonial 3-->
+                <div class="hidden flex-col items-center p-6 space-y-6 rounded-lg
+            bg-lighest md:flex md:w-1/3">
+                    <img src="../assets/img/profile.png" class="w-48 -mt-14 rounded-full h-48 object-cover" alt="">
+                    <h5 class="text-lg font-bold">Richard Watts</h5>
+                    <p class="text-sm text-darkGrayishBlue">
+                        "Manage has superchanged our team's workflow. The ability to
+                        maintain visibility on larger milestones at all times keeps
+                        everyone motivated".
+                    </p>
+                </div>
+
+            </div>
+            <div class="my-16">
+                <a href="#" class="p-3 px-6 pt-2 text-white bg-medium_light_blue rounded-full 
+                    baseline">
+                    Get Started
+                </a>
+
+            </div>
+        </div>
+    </section>
+   
+   </div>
+
+<div class="mt-8">
+       <FooterView></FooterView>
 </div>
    
 </template>
 <script>
 import {ref} from 'vue'
-import { reactive } from 'vue';
+import FooterView from '../views/FooterView.vue'
+export default{
+    components:{
+     FooterView
+    },
+    setup(){
+      
+        
+        return{
+            
+            
 
-export default {
-  setup() {
-    const spinner = ref(false)
+        }
 
-    const increment = ()=>{
-        spinner.value = !spinner.value
     }
-    return {
-      spinner,
-      increment
-    };
-
-  },
-};
+}
 </script>
