@@ -45,15 +45,7 @@
                             </h5>
                             <div class="flex flex-wrap">
 
-                                <div class="w-full lg:w-6/12 px-4">
-                                    <div class="relative w-full mb-3">
-                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
-                                        National Id</label>
-                                        <input v-model="national_id" type="text" class="px-3 py-3 placeholder-black text-gray-700
-                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
-                                    </div>
-                                </div>
-
+                        
                                 <div class="w-full lg:w-6/12 px-4">
                                     <div class="relative w-full mb-3">
                                        <label class="block text-gray-600 text-sm font-semibold mb-2">
@@ -68,6 +60,15 @@
                                        <label class="block text-gray-600 text-sm font-semibold mb-2">
                                         Lastname</label>
                                         <input v-model="last_name" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+                                </div>
+
+                                <div class="w-full lg:w-6/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        National Id</label>
+                                        <input v-model="national_id" type="text" class="px-3 py-3 placeholder-black text-gray-700
                                         bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
                                     </div>
                                 </div>
@@ -185,7 +186,7 @@
 </template>
 
 <script>
-import {ref} from 'vue'
+import {ref, computed} from 'vue'
 import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
 import config  from '../../../config'
 import axios from 'axios';
@@ -214,8 +215,25 @@ export default{
         const img_loading = ref(false)
 
          function create_employee_record(){
-           
-            if(!national_id.value || !first_name.value|| !last_name.value || !email.value || !gender.value){
+
+
+            if (dob.value) {
+                const dobDate = new Date(dob.value);
+                const currentDate = new Date();
+                const minDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+
+                if (isNaN(dobDate.getTime()) || dobDate > minDate) {
+                Swal.fire({
+                    text: "Please enter a valid date of birth (you must be 18 years or older)!",
+                    icon: "warning",
+                    dangerMode: true
+                });
+                loading.value = false;
+                return; // Exit the function if dob is not valid
+                }
+            }
+
+          if(!national_id.value || !first_name.value|| !last_name.value || !email.value || !gender.value){
              loading.value = true
              Swal.fire({
               text:"Please fill in all required fields!",
@@ -272,12 +290,16 @@ export default{
                                 text: "Failed to create a customer record!",
                                 icon: "error",
                              })
+                             loading.value = false
+
                     }else{
                         Swal.fire({
                                 title:"Information",
                                 text: "Check your network connection!",
                                 icon: "warning",
                              })
+                             loading.value = false
+
                     }
                })
           }
@@ -306,6 +328,10 @@ export default{
                     img_loading.value = false;
                     });
          };
+    
+
+  
+   
 
          const reset_form = ()=>{
             national_id.value = ""
@@ -339,7 +365,8 @@ export default{
             loading,
             reset_form,
             onProfileUpload,
-            img_loading
+            img_loading,
+        
         }
     }
 }

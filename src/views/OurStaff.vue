@@ -12,7 +12,7 @@
             <div class="flex flex-col mt-24 md:flex-row md:space-x-6">
                 <!--Testimonial 1-->
                 <div class="flex flex-col items-center p-6 space-y-6 rounded-lg
-             bg-lighest md:w-1/3">
+                bg-lighest md:w-1/3">
                     <img src="../assets/img/jcole.jpg" class="w-48 -mt-14 rounded-full h-48 object-cover" alt="">
                     <h5 class="text-lg font-bold">Anisha Li</h5>
                     <p class="text-sm text-darkGrayishBlue">
@@ -47,13 +47,7 @@
                 </div>
 
             </div>
-            <div class="my-16">
-                <a href="#" class="p-3 px-6 pt-2 text-white bg-medium_light_blue rounded-full 
-                    baseline">
-                    Get Started
-                </a>
-
-            </div>
+          
         </div>
     </section>
    

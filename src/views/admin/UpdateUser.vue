@@ -55,15 +55,7 @@
                             </h5>
                             <div class="flex flex-wrap">
 
-                                <div class="w-full lg:w-6/12 px-4">
-                                    <div class="relative w-full mb-3">
-                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
-                                        National Id</label>
-                                        <input v-model="users.national_id" type="text" class="px-3 py-3 placeholder-black text-gray-700
-                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
-                                    </div>
-                                </div>
-
+                      
                                 <div class="w-full lg:w-6/12 px-4">
                                     <div class="relative w-full mb-3">
                                        <label class="block text-gray-600 text-sm font-semibold mb-2">
@@ -81,6 +73,16 @@
                                         bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
                                     </div>
                                 </div>
+
+                                <div class="w-full lg:w-6/12 px-4">
+                                    <div class="relative w-full mb-3">
+                                       <label class="block text-gray-600 text-sm font-semibold mb-2">
+                                        National Id</label>
+                                        <input v-model="users.national_id" type="text" class="px-3 py-3 placeholder-black text-gray-700
+                                        bg-white rounded text-sm  shadow-sm focus:outline-none w-full ease-linear transition-all duration-150">
+                                    </div>
+                                </div>
+
 
                                 
                                 <div class="w-full lg:w-6/12 px-4">
@@ -252,6 +254,22 @@ export default{
 
          function update_employee_record(){
            
+            if (dob.value) {
+                const dobDate = new Date(dob.value);
+                const currentDate = new Date();
+                const minDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
+
+                if (isNaN(dobDate.getTime()) || dobDate > minDate) {
+                Swal.fire({
+                    text: "Please enter a valid date of birth (you must be 18 years or older)!",
+                    icon: "warning",
+                    dangerMode: true
+                });
+                loading.value = false;
+                return; // Exit the function if dob is not valid
+                }
+            }
+            
             if(!users.value.national_id || !users.value.first_name|| !users.value.last_name || !users.value.email || !users.value.gender){
              loading.value = true
              Swal.fire({
