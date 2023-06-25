@@ -287,20 +287,6 @@ export default{
           }
          }
 
-        //  const onProfileUpload = (e)=>{
-        //    loading.value = true
-        //    let formData = new FormData
-        //    formData.append('picture',e.target.files[0]);
-        //    console.log(formData);
-        //     axios.post(`${config.API_URL}/upload_image`, 
-        //     formData)
-        //     .then((response)=>{
-        //         profile_photo.value = response.data.image_url
-        //         console.log("The image url is "+profile_photo.value)
-        //        loading.value = false
-        //     })
-        //  }
-
          const onProfileUpload = (e) => {
                 const file = e.target.files[0];
                 if (!file) {
@@ -333,7 +319,7 @@ export default{
             gender.value =""
             dob.value =""
             phone_number.value =""
-            profile_photo.value =""
+            //profile_photo.value =""
             address.value =""
             place_residence.value =""
             current_city.value =""

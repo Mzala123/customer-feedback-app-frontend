@@ -315,7 +315,7 @@ export default{
             gender.value =""
             dob.value =""
             phone_number.value =""
-            profile_photo.value =""
+          //  profile_photo.value =""
             address.value =""
             place_residence.value =""
             current_city.value =""

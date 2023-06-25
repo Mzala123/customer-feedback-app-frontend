@@ -99,11 +99,11 @@
                      
                      <div class="flex flex-col items-left p-4 ">
                         <div class="flex items-center">
-                         <img class="w-8 h-8 mb-3 rounded-full shadow-lg" :src="users?.profile_photo" alt="Bonnie image"/>
+                         <img class="w-8 h-8 mb-3 rounded-full shadow-lg object-cover" :src="users?.profile_photo" alt="Bonnie image"/>
                          <h5 class="mb-1 ml-4 text-sm font-medium text-gray-900 dark:text-gray-800"> {{ users?.first_name }} {{ users?.last_name }}</h5>
                         </div>
-                         <span class="font-semibold text-sm text-gray-500 dark:text-gray-600"></span>
-                         <span class="text-xs text-gray-500 dark:text-gray-600">Employee no: {{ users?.person_no }}</span>
+                         <span v-if="user_type === 'Customer'" class="font-semibold text-sm text-gray-500 dark:text-gray-600"> Customer Account no: {{ users?.person_no }}</span>
+                         <span v-else class="text-sm text-gray-500 dark:text-gray-600">Employee no: {{ users?.person_no }}</span>
                         <div class="my-5 border-b border-lighter"></div>
                         <router-link v-bind:to="'/login'" class="flex items-center text-sm w-full bg-lighest py-2 px-2 hover:shadow-md rounded-lg">
                             <!-- <ArrowLeftIcon class="h-8 w-8"></ArrowLeftIcon> -->
