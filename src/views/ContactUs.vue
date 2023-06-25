@@ -6,14 +6,14 @@
             <h2 class="text-2xl font-semibold mb-6">Contact Us</h2>
             <div class="mb-4">
                 <p class="text-lg">Physical Address:</p>
-                <p class="text-gray-600">123 Main Street</p>
-                <p class="text-gray-600">City, State, ZIP</p>
+                <p class="text-gray-600">234 ,Lilongwe</p>
+                <p class="text-gray-600">capital city</p>
             </div>
             <div class="mb-4">
                 <p class="text-lg">Phone Numbers:</p>
-                <p class="text-gray-600">Main: (123) 456-7890</p>
-                <p class="text-gray-600">Sales: (123) 456-7891</p>
-                <p class="text-gray-600">Support: (123) 456-7892</p>
+                <p class="text-gray-600">Main: (265)880025627</p>
+                <p class="text-gray-600">enquiry: (265) 999546185</p>
+                <p class="text-gray-600">EMAIL: NBMcustomersoft@gmail.com</p>
             </div>
             </div>
         </div>
