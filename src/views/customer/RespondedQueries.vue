@@ -83,9 +83,7 @@
                         ...item,
                         response_description: item.response.length > 0 ? item.response[0].response_description : "",
                         response_submission_date: item.response.length > 0 ? item.response[0].submission_date : "",
-
                         }));
-
                          is_loading.value = false
                           console.log(feedbacks.value)
                      }

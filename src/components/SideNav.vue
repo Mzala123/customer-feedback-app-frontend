@@ -90,7 +90,7 @@
            </div>
            <div class="relative">
             <button @click="isDropdownOpen = !isDropdownOpen" class="flex rounded-full bg-lighter hover:bg-lightblue px-1 py-1 items-center">
-                <img src=".././assets/img/kendal.jpg" class="h-8 w-8 rounded-full" alt="">
+                <img :src="users?.profile_photo" class="h-8 w-8 rounded-full" alt="">
                 <!-- <p class="pl-2"> Mtende Mwanza </p> -->
             </button>
 
@@ -99,7 +99,7 @@
                      
                      <div class="flex flex-col items-left p-4 ">
                         <div class="flex items-center">
-                         <img class="w-8 h-8 mb-3 rounded-full shadow-lg" src=".././assets/img/profile.png" alt="Bonnie image"/>
+                         <img class="w-8 h-8 mb-3 rounded-full shadow-lg" :src="users?.profile_photo" alt="Bonnie image"/>
                          <h5 class="mb-1 ml-4 text-sm font-medium text-gray-900 dark:text-gray-800"> {{ users?.first_name }} {{ users?.last_name }}</h5>
                         </div>
                          <span class="font-semibold text-sm text-gray-500 dark:text-gray-600"></span>

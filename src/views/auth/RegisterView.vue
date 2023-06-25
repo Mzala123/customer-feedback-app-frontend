@@ -11,6 +11,33 @@
                   </div>
                 
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                        <div class="flex flex-col items-end md:flex-row p-6 space-y-6 md:space-y-0 md:space-x-6 rounded-lg bg-lighest md:w-1/3">
+                            <img :src="profile_photo" class="w-18 mt-6 rounded-lg h-18 object-cover" alt="">
+                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-10 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            
+                            
+                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center">
+                                
+                                    <span v-if="loading" class="text-gray-500 flex flex-row">
+                                        <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25 bg-white" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75 bg-white" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.314-2.686 6-6 6-3.314 0-6-2.686-6-6H6c0 4.411 3.589 8 8 8z"></path>
+                                         </svg>
+                                        uploading...
+                                    </span>
+                                    <span v-else class="font-semibold flex flex-row items-center w-96 ml-12 pt-2 pl-16">
+                                    <svg aria-hidden="true" class="w-6 h-6 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                   </svg> 
+                                        Click to upload
+                                    </span>
+                                </p>
+                           
+                                <input accept="image/*" @change="onProfileUpload" id="dropzone-file" type="file" class="hidden" />
+                            </label>
+                           
+                        </div>
+
                         <!-- <form action="" @submit.prevent="create_employee_record"> -->
                             <h5 class="text-gray-600 text-sm mt-3 mb-6 font-semibold uppercase">
                                 User Information
@@ -177,7 +204,7 @@ export default{
         const gender = ref(null)
         const dob = ref(null)
         const phone_number = ref(null)
-        const profile_photo = ref(null)
+        const profile_photo = ref(`${config.defaultImage}`)
         const address = ref(null)
         const place_residence = ref(null)
         const current_city = ref(null)
@@ -255,6 +282,30 @@ export default{
           }
          }
 
+         const onProfileUpload = (e) => {
+                const file = e.target.files[0];
+                if (!file) {
+                    console.log('No file selected');
+                    return;
+                }
+
+                loading.value = true;
+                const formData = new FormData();
+                formData.append('picture', file);
+
+                axios
+                    .post(`${config.API_URL}/upload_image`, formData)
+                    .then((response) => {
+                    profile_photo.value = response.data.image_url;
+                    console.log("The image URL is: " + profile_photo.value);
+                    loading.value = false;
+                    })
+                    .catch((error) => {
+                    console.log('Error:', error);
+                    loading.value = false;
+                    });
+         };
+
          const reset_form = ()=>{
             national_id.value = ""
             first_name.value = ""
@@ -285,7 +336,8 @@ export default{
             user_type,
             create_employee_record,
             loading,
-            reset_form
+            reset_form,
+            onProfileUpload
         }
     }
 }

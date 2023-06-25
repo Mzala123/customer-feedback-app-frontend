@@ -20,6 +20,34 @@
                   </div>
                 
                     <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+
+                        <div class="flex flex-col items-end md:flex-row p-6 space-y-6 md:space-y-0 md:space-x-6 rounded-lg bg-lighest md:w-1/3">
+                            <img :src="users.profile_photo" class="w-18 mt-6 rounded-lg h-18 object-cover" alt="">
+                            <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-10 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                            
+                            
+                                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center">
+                                
+                                    <span v-if="img_loading" class="text-gray-500 flex flex-row">
+                                        <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25 bg-white" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75 bg-white" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.314-2.686 6-6 6-3.314 0-6-2.686-6-6H6c0 4.411 3.589 8 8 8z"></path>
+                                         </svg>
+                                        uploading...
+                                    </span>
+                                    <span v-else class="font-semibold flex flex-row items-center w-96 ml-12 pt-2 pl-16">
+                                    <svg aria-hidden="true" class="w-6 h-6 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                                   </svg> 
+                                        Click to upload
+                                    </span>
+                                </p>
+                           
+                                <input accept="image/*" @change="onProfileUpload" id="dropzone-file" type="file" class="hidden" />
+                            </label>
+                           
+                        </div>
+
                         <!-- <form action="" @submit.prevent="create_employee_record"> -->
                             <h5 class="text-gray-600 text-sm mt-3 mb-6 font-semibold uppercase">
                                 User Information
@@ -136,7 +164,7 @@
                                            Cancel
                                         </button> -->
 
-                                       <button @click="create_employee_record" :disabled="loading" class="flex justify-center items-center rounded-lg 
+                                       <button @click="update_employee_record" :disabled="loading" class="flex justify-center items-center rounded-lg 
                                         bg-medium_light_blue px-3 py-3 text-white w-52 hover:bg-dark_blue">
                                             
                                           <span v-if="loading" class="flex justify-items-center">
@@ -169,7 +197,7 @@
 </template>
 
 <script>
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, reactive} from 'vue'
 import {PlusCircleIcon, UserPlusIcon, PencilIcon} from '@heroicons/vue/24/outline'
 import config  from '../../../config'
 import axios from 'axios';
@@ -191,15 +219,20 @@ export default{
         gender : ref(null),
         dob : ref(null),
         phone_number : ref(null),
-        profile_photo : ref(null),
+        profile_photo : ref(config.defaultImage),
         address : ref(null),
         place_residence : ref(null),
         current_city : ref(null),
         user_type : ref(null)
-    }
-        )
+    })
+
+   
         const loading = ref(false)
         const is_loading = ref(false)
+        const img_loading = ref(false)
+
+        //const profile_photo  = ref(`${config.defaultImage}`)
+
         
         const route = useRoute()
 
@@ -216,7 +249,7 @@ export default{
              })
         }
 
-         function create_employee_record(){
+         function update_employee_record(){
            
             if(!users.value.national_id || !users.value.first_name|| !users.value.last_name || !users.value.email || !users.value.gender){
              loading.value = true
@@ -278,6 +311,32 @@ export default{
           }
          }
 
+
+         const onProfileUpload = (e) => {
+                const file = e.target.files[0];
+                if (!file) {
+                    console.log('No file selected');
+                    return;
+                }
+
+                img_loading.value = true;
+                const formData = new FormData();
+                formData.append('picture', file);
+
+                axios
+                    .post(`${config.API_URL}/upload_image`, formData)
+                    .then((response) => {
+                    users.value.profile_photo = response.data.image_url;
+                    console.log("The image URL is: " + users.value.profile_photo);
+                    img_loading.value = false;
+                    })
+                    .catch((error) => {
+                    console.log('Error:', error);
+                    img_loading.value = false;
+                    });
+         };
+
+
          const reset_form = ()=>{
             users.value.national_id = ""
             users.value.first_name = ""
@@ -286,7 +345,7 @@ export default{
             users.value.gender =""
             users.value.dob =""
             users.value.phone_number =""
-            users.value.profile_photo =""
+            //users.value.profile_photo =""
             users.value.address.value =""
             users.value.place_residence =""
             users.value.current_city =""
@@ -295,6 +354,7 @@ export default{
 
          onMounted(()=>{
               get_list_user_by_id(route.params.id)
+              console.log (users.value.profile_photo)
          })
 
         return{
@@ -312,12 +372,15 @@ export default{
             // user_type,
             users,
 
-            create_employee_record,
+            update_employee_record,
+            //profile_photo,
 
             loading,
             reset_form,
             is_loading,
-            get_list_user_by_id
+            get_list_user_by_id,
+            onProfileUpload,
+            img_loading
         }
     }
 }
