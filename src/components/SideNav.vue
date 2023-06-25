@@ -99,7 +99,7 @@
                      
                      <div class="flex flex-col items-left p-4 ">
                         <div class="flex items-center">
-                         <img class="w-8 h-8 mb-3 rounded-full shadow-lg object-cover" :src="users?.profile_photo" alt="Bonnie image"/>
+                         <img class="w-12 h-12 mb-3 rounded-full shadow-sm object-cover" :src="users?.profile_photo" alt="Bonnie image"/>
                          <h5 class="mb-1 ml-4 text-sm font-medium text-gray-900 dark:text-gray-800"> {{ users?.first_name }} {{ users?.last_name }}</h5>
                         </div>
                          <span v-if="user_type === 'Customer'" class="font-semibold text-sm text-gray-500 dark:text-gray-600"> Customer Account no: {{ users?.person_no }}</span>
