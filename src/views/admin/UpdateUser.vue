@@ -44,6 +44,7 @@
                                 </p>
                            
                                 <input accept="image/*" @change="onProfileUpload" id="dropzone-file" type="file" class="hidden" />
+                                <input type="text" v-model="users.profile_photo" class="hidden">
                             </label>
                            
                         </div>

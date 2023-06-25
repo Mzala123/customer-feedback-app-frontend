@@ -10,12 +10,12 @@
                     day-to-day tasks while keeping the larger team goals
                     in view.
                 </p>
-                <div class="flex justify-center md:justify-start">
+                <!-- <div class="flex justify-center md:justify-start">
                     <a href="#" class="md:block p-3 px-6 pt-2 text-white bg-medium_light_blue rounded-full 
                     baseline hover:bg-brightRedLight">
                         Get Started
                     </a>
-                </div>
+                </div> -->
             </div>
             <div class="md:w-1/2">
                  <img src="./../assets/img/People in bank interior.jpeg" alt="okay"> 

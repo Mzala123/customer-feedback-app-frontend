@@ -18,7 +18,7 @@
                             
                                 <p class="mb-2 text-sm text-gray-500 dark:text-gray-400 text-center">
                                 
-                                    <span v-if="loading" class="text-gray-500 flex flex-row">
+                                    <span v-if="img_loading" class="text-gray-500 flex flex-row">
                                         <svg class="animate-spin h-5 w-5 mr-1" viewBox="0 0 24 24">
                                                     <circle class="opacity-25 bg-white" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                                     <path class="opacity-75 bg-white" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.314-2.686 6-6 6-3.314 0-6-2.686-6-6H6c0 4.411 3.589 8 8 8z"></path>
@@ -34,6 +34,7 @@
                                 </p>
                            
                                 <input accept="image/*" @change="onProfileUpload" id="dropzone-file" type="file" class="hidden" />
+                                <input type="text" v-model="profile_photo" class="hidden">
                             </label>
                            
                         </div>
@@ -210,7 +211,7 @@ export default{
         const current_city = ref(null)
         const user_type = ref(null)
         const loading = ref(false)
-
+        const img_loading = ref(false)
 
          function create_employee_record(){
            
@@ -289,7 +290,7 @@ export default{
                     return;
                 }
 
-                loading.value = true;
+                img_loading.value = true;
                 const formData = new FormData();
                 formData.append('picture', file);
 
@@ -298,11 +299,11 @@ export default{
                     .then((response) => {
                     profile_photo.value = response.data.image_url;
                     console.log("The image URL is: " + profile_photo.value);
-                    loading.value = false;
+                    img_loading.value = false;
                     })
                     .catch((error) => {
                     console.log('Error:', error);
-                    loading.value = false;
+                    img_loading.value = false;
                     });
          };
 
@@ -337,7 +338,8 @@ export default{
             create_employee_record,
             loading,
             reset_form,
-            onProfileUpload
+            onProfileUpload,
+            img_loading
         }
     }
 }
