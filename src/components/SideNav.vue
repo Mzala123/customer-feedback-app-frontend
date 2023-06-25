@@ -90,7 +90,7 @@
            </div>
            <div class="relative">
             <button @click="isDropdownOpen = !isDropdownOpen" class="flex rounded-full bg-lighter hover:bg-lightblue px-1 py-1 items-center">
-                <img :src="users?.profile_photo" class="h-8 w-8 rounded-full" alt="">
+                <img :src="users?.profile_photo" class="h-8 w-8 rounded-full object-cover" alt="">
                 <!-- <p class="pl-2"> Mtende Mwanza </p> -->
             </button>
 
@@ -137,7 +137,7 @@
 import { ref, onMounted} from "vue";
 import {HomeIcon, UserPlusIcon, UserGroupIcon, UserIcon,PlusCircleIcon, ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon,
      Bars3CenterLeftIcon, Bars3Icon, PlusIcon, BellIcon, ArrowLongLeftIcon, ArrowLeftIcon, ArchiveBoxIcon,InformationCircleIcon,
-     QuestionMarkCircleIcon
+     QuestionMarkCircleIcon, PencilSquareIcon
 
     } from '@heroicons/vue/24/outline'
 import router from '../router';
@@ -148,7 +148,7 @@ import config from '../../config'
 export default{
     components:{
       Bars3CenterLeftIcon, Bars3Icon, UserPlusIcon, PlusIcon, PlusCircleIcon, ArrowLongLeftIcon, ArrowLeftIcon,
-      ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon, ArchiveBoxIcon, InformationCircleIcon
+      ChatBubbleOvalLeftIcon, ChatBubbleOvalLeftEllipsisIcon, ArchiveBoxIcon, InformationCircleIcon, PencilSquareIcon
     },
     setup(){
 
@@ -164,7 +164,7 @@ export default{
     ]
     const adminMenu = ref([
            {title:'Dashboard', icon: HomeIcon, name:'admin-dashboard'},
-        // {title:'Notification', icon: BellIcon, name:'user-list'},
+           {title:'Update Admin Details', icon: PencilSquareIcon, name:'update-admin'},
            {title:'Profile', icon: UserIcon, name:'admin-profile-settings'},
            {title:'Users list', icon: UserGroupIcon, name:'user-list'},
            {title:'Archived Accounts', icon: ArchiveBoxIcon, name:'archived-accounts'},

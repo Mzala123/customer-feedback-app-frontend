@@ -13,7 +13,7 @@
           <div class="w-full lg:w-3/12 xl:w-3/12 px-4 h-96">
                      
                 <div class="flex flex-col items-center p-4 bg-lighest rounded-md border-t-4 border-medium_light_blue shadow">
-                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" :src="users?.profile_photo" alt="Bonnie image"/>
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg object-cover" :src="users?.profile_photo" alt="image"/>
                     <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-gray-800"> {{ users?.first_name }} {{ users?.last_name }}</h5>
                     <span class="font-semibold text-sm text-gray-500 dark:text-gray-600">{{ users?.user_type }}</span>
                     <span class="text-sm text-gray-500 dark:text-gray-600">Employee no: {{ users?.person_no }}</span>

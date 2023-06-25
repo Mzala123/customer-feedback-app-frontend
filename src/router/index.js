@@ -15,6 +15,7 @@ import UserList from '../views/admin/UserList.vue'
 import AdminProfile from '../views/admin/AdminProfile.vue'
 import UserDetails from '../views/admin/UserDetails.vue'
 import ArchivedAccounts from '../views/admin/ArchivedAccounts.vue'
+import UpdateAdmin from '../views/admin/UpdateAdmin.vue'
 
 import CustomerDashboard from '../views/customer/CustomerDashboard.vue'
 import ChatBot from '../views/customer/ChatBot.vue'
@@ -150,6 +151,11 @@ const routes = [
         path:'/my_unresponded_queries',
         name:'my-unresponded-queries',
         component:UnRespondedQueries
+       },
+       {
+        path:'/update_admin',
+        name: 'update-admin',
+        component:UpdateAdmin
        }
     ]
   }
