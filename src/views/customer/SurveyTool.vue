@@ -101,6 +101,7 @@
           <div class="selected-rating">
             <span>Selected Rating:</span>
             <span>{{ selectedRating }}</span>
+            <input class="hidden" type="number" v-model="selectedRating">
           </div>
         </div>
         </div>
@@ -133,6 +134,7 @@
           <div class="selected-rating">
             <span>Selected Rating:</span>
             <span>{{selectedRating1 }}</span>
+            <input class="hidden" type="number" v-model="selectedRating1">
           </div>
         </div>
         </div>
@@ -165,6 +167,7 @@
           <div class="selected-rating">
             <span>Selected Rating:</span>
             <span>{{selectedRating2 }}</span>
+            <input class="hidden" type="number" v-model="selectedRating2">
           </div>
         </div>
         </div>
@@ -303,6 +306,10 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
              loading.value = false
            }else{
             loading.value = true
+            console.log("The rating is "+selectedRating.value)
+              //         const accessibilityRating = parseInt(selectedRating.value);
+              //       const securityRating = parseInt(selectedRating1.value);
+              // const recommendationRating = parseInt(selectedRating2.value);
              axios
               .post(`${config.API_URL}/feedback`,
               {
@@ -310,9 +317,10 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
                 type: type.value,
                 description: description.value,
                 userId: userId,
-                How_satisfied_are_you_with_the_accessibility_and_availability_of_the_banks_branch_network_and_ATMs: selectedRating.value,
-                How_satisfied_are_you_with_the_level_of_security_provided_by_the_bank_for_your_transactions_and_personal_information: selectedRating1.value,
-                How_likely_are_you_to_recommend_the_National_Bank_of_Malawi_to_family_friends_or_colleagues: selectedRating2.value
+                selectedRating :selectedRating.value,
+                selectedRating1 : selectedRating1.value,
+                selectedRating2 : selectedRating2.value 
+
               }).then((response)=>{
                 if(response.status === 201){
                        Swal.fire({
@@ -327,8 +335,7 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
                             selectedRating.value=""
                             selectedRating1.value=""
                             selectedRating2.value=""
-                    loading.value = false
-                
+                            loading.value = false    
                 }
 
               }).catch((error)=>{
