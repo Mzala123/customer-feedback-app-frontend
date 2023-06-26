@@ -73,6 +73,101 @@
               class="px-3 py-3 placeholder-black text-gray-700 bg-lighest rounded text-sm shadow-sm focus:outline-none w-full ease-linear transition-all duration-150"
             ></textarea>
           </div>
+
+
+          <div class=" w-full lg:w-12/12 px-4 mt-3 flex flex-col">
+          <div>
+            <label
+              class="block text-gray-600 text-sm font-semibold mb-2"
+              :for="getFeedbackDescriptionId"
+            >
+              {{ translation.question1 }}
+            </label>
+          </div>
+          <div class="flex flex-row">
+          <div v-for="star in totalStars" :key="star" class="flex flex-row star" @click="selectRating(star)">
+            <svg
+              class="star-icon"
+              :class="{ 'filled': star <= selectedRating }"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 2L14.55 8.39L21 9.13L16.24 13.34L17.47 20.87L12 17.5L6.53 20.87L7.76 13.34L3 9.13L9.45 8.39L12 2Z"
+              />
+            </svg>
+          </div>
+          <div class="selected-rating">
+            <span>Selected Rating:</span>
+            <span>{{ selectedRating }}</span>
+          </div>
+        </div>
+        </div>
+
+
+        <!--Question two-->
+        <div class=" w-full lg:w-12/12 px-4 mt-8 flex flex-col">
+          <div>
+            <label
+              class="block text-gray-600 text-sm font-semibold mb-2"
+              :for="getFeedbackDescriptionId"
+            >
+              {{ translation.question2 }}
+            </label>
+          </div>
+          <div class="flex flex-row">
+          <div v-for="star in totalStars" :key="star" class="flex flex-row star" @click="selectRating1(star)">
+            <svg
+              class="star-icon"
+              :class="{ 'filled': star <= selectedRating1 }"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 2L14.55 8.39L21 9.13L16.24 13.34L17.47 20.87L12 17.5L6.53 20.87L7.76 13.34L3 9.13L9.45 8.39L12 2Z"
+              />
+            </svg>
+          </div>
+          <div class="selected-rating">
+            <span>Selected Rating:</span>
+            <span>{{selectedRating1 }}</span>
+          </div>
+        </div>
+        </div>
+  
+
+           <!--Question threww-->
+           <div class=" w-full lg:w-12/12 px-4 mt-8 flex flex-col">
+          <div>
+            <label
+              class="block text-gray-600 text-sm font-semibold mb-2"
+              :for="getFeedbackDescriptionId"
+            >
+              {{ translation.question3 }}
+            </label>
+          </div>
+          <div class="flex flex-row">
+          <div v-for="star in totalStars" :key="star" class="flex flex-row star" @click="selectRating2(star)">
+            <svg
+              class="star-icon"
+              :class="{ 'filled': star <= selectedRating2 }"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M12 2L14.55 8.39L21 9.13L16.24 13.34L17.47 20.87L12 17.5L6.53 20.87L7.76 13.34L3 9.13L9.45 8.39L12 2Z"
+              />
+            </svg>
+          </div>
+          <div class="selected-rating">
+            <span>Selected Rating:</span>
+            <span>{{selectedRating2 }}</span>
+          </div>
+        </div>
+        </div>
   
          
             <div class="relative w-full mb-3 mt-6 flex justify-end px-4">
@@ -127,6 +222,25 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
 
         const userStore = useUserStore();
         const userId = userStore.getUserId;
+
+        const totalStars = 5;
+        const selectedRating = ref(0);
+
+        const selectRating = (rating) => {
+          selectedRating.value = rating;
+        };
+
+        const selectedRating1 = ref(0)
+        const selectRating1 = (rating)=>{
+          selectedRating1.value = rating
+        }
+
+        const selectedRating2 = ref(0)
+        const selectRating2 = (rating)=>{
+          selectedRating2.value = rating
+        }
+
+
   
       const translations = {
         en: {
@@ -135,6 +249,9 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
           complaint: 'Complaint',
           suggestion: 'Suggestion',
           feedbackDescription: 'Feedback Description',
+          question1:"How satisfied are you with the accessibility and availability of the bank's branch network and ATMs?",
+          question2:"How satisfied are you with the level of security provided by the bank for your transactions and personal information?",
+          question3:"How likely are you to recommend the National Bank of Malawi to family, friends, or colleagues?",
           submit: 'Submit',
           cancel: 'Cancel'
         },
@@ -144,6 +261,9 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
           complaint: 'Dandaulo',
           suggestion: 'Lingaliro',
           feedbackDescription: 'Kafotokoza ka ndemanga',
+          question1:"Kodi ndinu okhutira bwanji ndi kupezeka kwa nthambi ya ATM?",
+          question2:"Kodi ndinu okhutira bwanji ndi chitetezo  chomwe bankiyi imapereka?",
+          question3:"Kodi mungalimbikitse  amzanu kuti ayambe kugwiritsa ntchito bankiyi?",
           submit: 'Tumiza',
           cancel:'Siya'
         },
@@ -189,7 +309,10 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
                 title: title.value,
                 type: type.value,
                 description: description.value,
-                userId: userId
+                userId: userId,
+                How_satisfied_are_you_with_the_accessibility_and_availability_of_the_banks_branch_network_and_ATMs: selectedRating.value,
+                How_satisfied_are_you_with_the_level_of_security_provided_by_the_bank_for_your_transactions_and_personal_information: selectedRating1.value,
+                How_likely_are_you_to_recommend_the_National_Bank_of_Malawi_to_family_friends_or_colleagues: selectedRating2.value
               }).then((response)=>{
                 if(response.status === 201){
                        Swal.fire({
@@ -201,6 +324,9 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
                             title.value = "",
                             type.value =""
                             description.value =""
+                            selectedRating.value=""
+                            selectedRating1.value=""
+                            selectedRating2.value=""
                     loading.value = false
                 
                 }
@@ -230,6 +356,9 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
             title.value = "",
             type.value =""
             description.value =""
+            selectedRating.value=""
+            selectedRating1.value=""
+            selectedRating2.value=""
 
         }
 
@@ -247,9 +376,48 @@ import {PlusCircleIcon, UserPlusIcon} from '@heroicons/vue/24/outline'
         toggleLanguage,
         create_feedback,
         reset_form,
-        loading
+        loading,
+
+        totalStars,
+        selectedRating,
+        selectRating,
+
+
+        selectedRating1,
+        selectRating1,
+
+        selectedRating2,
+        selectRating2
+
       };
     },
   };
   </script>
   
+
+  <style scoped>
+.rating-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.star {
+  cursor: pointer;
+}
+
+.star-icon {
+  width: 24px;
+  height: 24px;
+  transition: fill 0.2s;
+}
+
+.star-icon.filled {
+  fill: #DC3E;
+}
+
+.selected-rating {
+  font-weight: bold;
+}
+</style>

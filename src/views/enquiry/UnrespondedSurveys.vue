@@ -25,7 +25,11 @@
             :search-value="searchValue"
         >
         <template #item-action="{_id}">
-
+                <div class="flex justify-center items-center">
+                            <router-link :to ="'/view_feedback_data/'+_id">
+                            <EyeIcon class="stroke-blue mr-2 h-6 w-6"></EyeIcon>
+                            </router-link>
+                </div>
        </template>
     </EasyDataTable>
        </div>
@@ -46,7 +50,7 @@ import jsPDF from 'jspdf'
 import autoTable from 'jspdf-autotable'
 
     export default{
-        components:{DocumentArrowDownIcon},
+        components:{DocumentArrowDownIcon, EyeIcon},
         setup(){
 
             const feedbacks = ref([]);
@@ -60,6 +64,7 @@ import autoTable from 'jspdf-autotable'
                 { text: "Description", value: "description"},
                 { text: "Date submitted", value: "date_submitted", sortable: true },
                 { text: "Submitted by", value: "feedBackDocs.email", sortable: true },
+                { text: "Action", value:"action", sortable:true}
            
             ])
 
@@ -110,6 +115,10 @@ import autoTable from 'jspdf-autotable'
                     doc.save('NB|Unresponded queries list.pdf') 
            }
 
+           const viewFeedback = (feedback_id)=>{
+            console.log(feedback_id)
+           }
+
              onMounted(()=>{
                 get_list_unresponded_queries()
              })
@@ -121,7 +130,9 @@ import autoTable from 'jspdf-autotable'
                is_loading,
                headers,
                get_list_unresponded_queries,
-               export_unresponded_feedbacks
+               export_unresponded_feedbacks,
+
+               viewFeedback
             }
         }
     }

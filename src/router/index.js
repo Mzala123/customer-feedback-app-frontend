@@ -28,6 +28,7 @@ import SurveyIssues from '../views/enquiry/SurveyIssues.vue'
 import EnquiryDashboard from '../views/enquiry/EnquiryDashboard.vue'
 import RespondedSurveys from '../views/enquiry/RespondedSurveys.vue'
 import UnrespondedSurveys from '../views/enquiry/UnrespondedSurveys.vue'
+import ViewFeedbackData from '../views/enquiry/ViewFeedbackData.vue'
 
 
 
@@ -156,6 +157,11 @@ const routes = [
         path:'/update_admin',
         name: 'update-admin',
         component:UpdateAdmin
+       },
+       {
+        path:'/view_feedback_data/:id',
+        name:'view-feedback-data',
+        component: ViewFeedbackData
        }
     ]
   }
