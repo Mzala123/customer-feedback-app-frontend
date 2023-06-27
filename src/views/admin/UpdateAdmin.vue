@@ -259,8 +259,8 @@ export default{
 
          function update_employee_record(){
 
-            if (dob.value) {
-                const dobDate = new Date(dob.value);
+            if (users.value.dob) {
+                const dobDate = new Date(users.value.dob);
                 const currentDate = new Date();
                 const minDate = new Date(currentDate.getFullYear() - 18, currentDate.getMonth(), currentDate.getDate());
 
